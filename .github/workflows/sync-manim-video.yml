@@ -1,0 +1,49 @@
+# Keep skills/manim-video identical in Rami5743/AI_TOOLS and Rami5743/AI_MANIM.
+# This file and .github/scripts/sync_manim.py are the same in both repositories.
+#
+# Needs the repository secret SYNC_TOKEN, in both repositories: a fine-grained
+# personal access token with "Contents: Read and write" on both repositories.
+name: Sync manim-video
+
+on:
+  push:
+    branches: [main]
+    paths: ["skills/manim-video/**"]
+  workflow_dispatch:
+  schedule:
+    - cron: "41 3 * * *"   # a daily safety net, in case a run was missed
+
+concurrency:
+  group: sync-manim-video
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the token
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          if [ -z "$SYNC_TOKEN" ]; then
+            echo "::error::The secret SYNC_TOKEN is missing. See CLAUDE.md, section 'The mirrored skill'."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          filter: blob:none
+          token: ${{ secrets.SYNC_TOKEN }}
+
+      - name: Sync
+        env:
+          SYNC_TOKEN: ${{ secrets.SYNC_TOKEN }}
+        run: |
+          git config user.name "manim-video sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 .github/scripts/sync_manim.py

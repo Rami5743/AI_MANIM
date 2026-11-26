@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-manim",
+  "owner": {
+    "name": "Avraham Aizenbud"
+  },
+  "metadata": {
+    "description": "Marketplace exposing the manim-video skill as a Claude Code plugin.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ai-manim",
+      "source": "./",
+      "description": "Builds an animated explainer video, in the style of 3Blue1Brown, from a narration script with Manim: proofreading, scene plans with timed subtitles, implementation, render-and-review loops, and the final assembly."
+    }
+  ]
+}
