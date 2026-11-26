@@ -45,6 +45,17 @@ an animation of its own (a row anchored to it, such as a sweep or a final
 fade) keeps its length. Then every scene is rendered again, and delivered
 again.
 
+**1.6 The rate is in syllables, formulas as read aloud.** (user) How long a
+cue takes is how long it takes to say: count its syllables, and count a
+formula or a number by the words it is read with ($r_{1\%}$ is "אר אחוז"),
+not by its characters. `scripts/syllables.py`.
+
+**1.7 A long silence becomes narration when the user writes it.** (user) If
+the user adds a sentence that describes an animation already on screen — in
+the PNT video, "נרוץ על כל המספרים בטווח זה…" during the sliding window —
+the animation is re-anchored to start with that sentence (1.1), and the
+silent stretch that held it becomes a wait for what is left of it (1.2).
+
 ## 2. Change moves, coming and going fades
 
 **2.1 When something changes, it moves; when it appears or goes away, it
@@ -165,3 +176,10 @@ arranged so that it reads right to left.
 **6.4 Highlights do not distort.** (review) Highlight a picture with
 `Circumscribe`, since `Indicate` tints it. Flash a line with
 `Indicate(..., scale_factor=1)`, since a scaled line overruns its axes.
+
+**6.5 Hebrew in quotation marks stays in them on screen.** (user) A term the
+narration puts in quotation marks ("הנדירות") is shown in them too.
+
+**6.6 A formula in a subtitle keeps its indices.** (user) $p_{1\%}(n)$ is
+`p₁%(n)` in the subtitle, the 1 and the % both in the index: Unicode
+subscript digits, and the subtitle font of `scripts/subfont.py` for the %.

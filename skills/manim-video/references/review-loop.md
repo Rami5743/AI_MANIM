@@ -64,8 +64,14 @@ FFmpeg's `subtitles` filter (libass), two settings decide whether Hebrew comes
 out right:
 
 ```bash
-ffmpeg -i out/NN-slug.mp4 -vf "subtitles=subtitles.srt:force_style='FontName=DejaVu Sans,FontSize=16,Encoding=-1,Outline=1.2,MarginV=8'" preview/NN-slug-subtitled.mp4
+python3 scripts/subfont.py --burnable subtitles.srt /tmp/burn.srt
+ffmpeg -i out/NN-slug.mp4 -vf "subtitles=/tmp/burn.srt:fontsdir=<project>/fonts:force_style='FontName=Subtitle Sans,FontSize=16,Encoding=-1,Outline=1.2,MarginV=8'" preview/NN-slug-subtitled.mp4
 ```
+
+- `Subtitle Sans` is DejaVu Sans with a subscript % (`scripts/subfont.py`
+  builds it into `<project>/fonts/`). libass ignores the font's contextual
+  substitution, so the burned copy writes the subscript % explicitly
+  (`--burnable`); the `subtitles.srt` a viewer gets keeps the plain `p₁%(n)`.
 
 - `Encoding=-1` makes libass take each line's base direction from its text.
   Without it every line is laid out left to right and the full stop of a

@@ -14,7 +14,7 @@ that a project can be picked up by reading them and nothing else.
 | source script | `script/script.md` |
 | resolution | 1920×1080, 60 fps |
 | draft quality | `-qm` (1280×720, 30 fps) |
-| reading rate | 9.1 characters per second |
+| reading rate | 5.05 syllables per second, formulas as read aloud |
 | inter-cue gap | 0.15 s |
 | scene head / tail silence | 0.8 s |
 | total planned | 7:42 |

@@ -10,7 +10,9 @@ lexical order — which is why they are numbered `01`, `02`, …. Each contribut
 the one `.mp4` under its `out/` and, if present, its `subtitles.srt`. The
 default output is `<project>/final/<project name>.mp4` with the merged track
 beside it. `--burn` also writes `<name>-subtitled.mp4`, the same video with
-the merged track burned into the picture (in the style of the previews).
+the merged track burned into the picture (in the style of the previews), in
+the subtitle font of subfont.py when `<project>/fonts/SubtitleSans.ttf`
+exists (or `--fonts DIR`).
 
 Scenes can also be listed by hand:
 
@@ -119,11 +121,15 @@ def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
 # The style of the burned-in subtitles: the one review-loop.md uses for previews.
 # Encoding=-1 lets libass take the base direction of each line from its text,
 # which a right-to-left subtitle needs.
-STYLE = ("FontName=DejaVu Sans,FontSize=16,Encoding=-1,PrimaryColour=&H00FFFFFF,"
+STYLE = ("FontName={font},FontSize=16,Encoding=-1,PrimaryColour=&H00FFFFFF,"
          "OutlineColour=&H00000000,BorderStyle=1,Outline=1.2,Shadow=0,MarginV=8")
 
 
-def concat(videos: list[str], out: str, burn: str | None) -> None:
+def esc(path: str) -> str:
+    return path.replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
+
+
+def concat(videos: list[str], out: str, burn: str | None, fonts: str | None = None) -> None:
     os.makedirs(os.path.dirname(os.path.abspath(out)) or ".", exist_ok=True)
     listing = os.path.abspath(out) + ".concat.txt"
     with open(listing, "w", encoding="utf-8") as handle:
@@ -133,8 +139,19 @@ def concat(videos: list[str], out: str, burn: str | None) -> None:
     base = [need("ffmpeg"), "-y", "-v", "error",
             "-f", "concat", "-safe", "0", "-i", listing]
     if burn:
-        escaped = burn.replace("\\", "\\\\").replace(":", r"\:").replace("'", r"\'")
-        attempts = [base + ["-vf", f"subtitles='{escaped}':force_style='{STYLE}'",
+        # With the subtitle font of subfont.py: burn a copy in which the
+        # subscript % is written out, since libass applies no contextual forms.
+        if fonts:
+            from subfont import burnable
+            copy = os.path.abspath(out) + ".burn.srt"
+            with open(copy, "w", encoding="utf-8") as handle:
+                handle.write(burnable(open(burn, encoding="utf-8").read()))
+            burn = copy
+            vf = (f"subtitles='{esc(burn)}':fontsdir='{esc(fonts)}'"
+                  f":force_style='{STYLE.format(font='Subtitle Sans')}'")
+        else:
+            vf = f"subtitles='{esc(burn)}':force_style='{STYLE.format(font='DejaVu Sans')}'"
+        attempts = [base + ["-vf", vf,
                             "-c:v", "libx264", "-pix_fmt", "yuv420p",
                             "-crf", "18", out]]
     else:
@@ -178,6 +195,8 @@ def main() -> None:
                         help="scene subtitle files, in the same order; "
                              "write - for a scene that has none")
     parser.add_argument("--out", help="the joined video")
+    parser.add_argument("--fonts", help="directory holding SubtitleSans.ttf (subfont.py); "
+                        "default <project>/fonts when it exists")
     parser.add_argument("--burn", action="store_true",
                         help="burn the merged subtitles into the picture as well")
     args = parser.parse_args()
@@ -216,7 +235,14 @@ def main() -> None:
     concat(videos, out, None)
     if args.burn:
         burned = os.path.splitext(out)[0] + "-subtitled.mp4"
-        concat(videos, burned, srt_out)
+        fonts = args.fonts
+        if fonts is None and args.project:
+            fonts = os.path.join(args.project, "fonts")
+        if fonts and not os.path.exists(os.path.join(fonts, "SubtitleSans.ttf")):
+            fonts = None
+        concat(videos, burned, srt_out, os.path.abspath(fonts) if fonts else None)
+        if fonts:
+            os.remove(os.path.abspath(burned) + ".burn.srt")
         print(f"wrote {os.path.abspath(burned)}  (subtitles burned in)")
     print(f"wrote {os.path.abspath(out)}  ({duration(out):.2f} s)")
     if abs(duration(out) - total) > 0.25:

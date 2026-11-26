@@ -196,20 +196,35 @@ of the cue times rather than beside them.
 
 | Rule | Value |
 |---|---|
-| Reading rate | 9.1 characters per second, spaces included |
-| Cue duration | `max(2.1 s, chars / 9.1)`, rounded up to 0.1 s |
-| Longest cue | 8.6 s — split it instead |
+| Reading rate | 5.05 **syllables** per second, every formula and number counted as it is read aloud |
+| Cue duration | `max(1.8 s, syllables / 5.05)`, rounded up to 0.1 s |
+| Longest cue | 7.1 s — split it instead |
 | Gap between cues | 0.15 s |
 | Lines per cue | at most 2 |
 | Characters per line | at most 42 |
 | Where to break | at a clause boundary, never inside a formula and never between a number and its unit |
 
-The rate is the user's: the first project began at 13 characters per second
-and the user slowed it by 30%, the shortest and longest cue growing in
-proportion. Record it at the top of `scenes.md`, so that recalibrating the
-whole video is one edit in one place (and see `references/animation-rules.md`,
-1.5, for what else a change of rate means). A scene gets a
-0.8 s silent beat before its first cue and after its last.
+**Measure the rate in syllables, never in characters** (the user's rule). A
+formula is short on the page and long in the mouth: imagine it read aloud and
+count that — $r_{1\%}$ is "אר אחוז", $\ln p/p$ is "לוג פה חלקי פה". The project
+keeps a table of how each formula and number of its narration is read
+(`readings.py` beside `narration.py`), and `scripts/syllables.py` counts a cue
+from it: a run with no reading is an error, not a zero. Hebrew words written
+without vowels are estimated from their letters (see the script).
+
+The rate is the user's: the first project began at 13 characters per second,
+which on its narration was 5.94 syllables per second, and the user settled on
+15% below that, the shortest and longest cue growing in proportion. Record it
+at the top of `scenes.md`, so that recalibrating the whole video is one edit
+in one place (and see `references/animation-rules.md`, 1.5, for what else a
+change of rate means). A scene gets a 0.8 s silent beat before its first cue
+and after its last.
+
+A formula in a subtitle keeps its indices: $p_{1\%}(n)$ is written `p₁%(n)`,
+with the Unicode subscript digits, and the % is shown as an index too by the
+subtitle font that `scripts/subfont.py` builds (Unicode has no subscript %).
+Burn previews and the final video with that font, and use it for the subtitles
+of any web page that plays the videos.
 
 Add nothing to the narration and drop nothing from it. A parenthesised
 description never becomes a subtitle.
@@ -352,3 +367,5 @@ in chat.
 | `scripts/zoomline.py` | a number line that really zooms — the axis stretches and ticks travel with their values |
 | `scripts/deliveries.py` | the log of renders sent to the user; `check` must pass before integration |
 | `scripts/rescale.py` | a change of scale (linear to log, any rescaling): one map for curves, ticks and numbers, numbers morphing between notations |
+| `scripts/syllables.py` | the length of a cue in syllables, formulas counted as read aloud from the project's table of readings |
+| `scripts/subfont.py` | the subtitle font ("Subtitle Sans"), in which a % after a subscript digit is a subscript too; `--burnable` for burning with libass, `--web` for a page |
