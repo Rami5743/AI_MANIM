@@ -39,8 +39,10 @@ change in a cue's length moves plan and render together.
 their own. But the silent stretches that only waited for an animation to
 finish are now wrong: longer cues often cover the animation, and the wait must
 shrink or go (1.2). Recompute each such stretch as what its animation still
-needs — the latest end of an animation started before it, minus its start,
-rounded up to 0.1 s — and remove it when that is nothing. A stretch that holds
+needs — the latest end of an animation started before it, or chained
+("after") to one that was, minus its start, rounded up to 0.1 s — and remove
+it when that is nothing. Leaving out the chained ones is the trap: a chain
+that began in the cue runs on into the stretch. A stretch that holds
 an animation of its own (a row anchored to it, such as a sweep or a final
 fade) keeps its length. Then every scene is rendered again, and delivered
 again.
