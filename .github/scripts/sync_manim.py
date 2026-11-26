@@ -66,10 +66,10 @@ def other_repo(here):
 def fetch():
     """Full history of both main branches. Blobs are not needed for the
     decision (only trees are), so they are filtered where possible."""
-    if out("rev-parse", "--is-shallow-repository") == "true":
-        git("fetch", "-q", "--filter=blob:none", "--unshallow", "origin", BRANCH)
-    git("fetch", "-q", "--filter=blob:none", "origin", BRANCH)
-    git("fetch", "-q", "--filter=blob:none", "there", BRANCH)
+    unshallow = ["--unshallow"] if out("rev-parse", "--is-shallow-repository") == "true" else []
+    for remote in ("origin", "there"):       # explicit refspecs: a clone may lack them
+        git("fetch", "-q", "--filter=blob:none", *(unshallow if remote == "origin" else []),
+            remote, f"+refs/heads/{BRANCH}:refs/remotes/{remote}/{BRANCH}")
 
 
 def tree(ref):
