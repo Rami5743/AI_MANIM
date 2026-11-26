@@ -26,19 +26,40 @@ writing before a line of Python was written.
 
 ## What a script looks like
 
-The script is prose with **parenthesised descriptions** interleaved, and LaTeX
-formulas inside it. The two parts have completely different fates:
+The script is prose with **stage directions in square brackets** interleaved,
+and LaTeX formulas inside it. The two parts have completely different fates:
 
 | Part of the script | What it is | Where it ends up |
 |---|---|---|
 | The running text | the narration — what the viewer hears, or reads as subtitles | the subtitle track, word for word |
-| Text in parentheses | the user's instruction to you about the picture | the animation plan, never the subtitles |
+| Text in `[square brackets]` | the user's instruction to you about the picture | the animation plan, never the subtitles |
 | LaTeX formulas | mathematics to be shown | `MathTex` on screen, and in the subtitle only when the narration says it aloud |
+
+**Square brackets, not parentheses** (the user's convention). Parentheses are
+free for the narration itself: "(כמעט תמיד)" is something the narrator says,
+and goes to the subtitles like any other words. Tell a direction from a
+bracket that belongs to mathematics by judgment, not by pattern:
+
+- a bracket inside a formula is mathematics: `$[0,1]$`, `$\left[\frac{n}{p}\right]$`,
+  `$[x]$` for an integer part, a half-open `$[a,b)$`;
+- so is a bracket the narration reads as mathematics even without `$…$`
+  ("בקטע [0,1]"): a short run of symbols, numbers and commas, closed in the
+  same sentence;
+- a direction is prose about the picture — what appears, moves, is marked —
+  usually a phrase or more, often a sentence of its own, standing between
+  sentences or at their end;
+- when a bracket could be either, ask in `spelling.md` (stage 2) rather than
+  guess.
+
+Scripts written before this convention mark directions with parentheses. If a
+script has no square-bracket direction at all and its parenthesised passages
+read as directions, treat those as the directions, and say so in
+`spelling.md`.
 
 **The narration is the user's writing.** Spelling and typos are corrected in
 stage 2 and nothing else about it changes — not the wording, not the order, not
-the length. The parenthesised descriptions are raw material, and are expected to
-be incomplete: filling them in is stage 3's job.
+the length. The stage directions are raw material, and are expected to be
+incomplete: filling them in is stage 3's job.
 
 ## The stages
 
@@ -130,9 +151,10 @@ mistyped — those go into `script/spelling.md` as questions, not into the file.
 Tag them `P1`, `P2`, … so the user can answer by quoting a tag.
 
 While reading, also normalise the mechanical shape of the file, which is not a
-change to the script: one scene-sized paragraph per block, parenthesised
-descriptions kept on their own lines where they already stand alone, LaTeX in
-`$…$` and `$$…$$`.
+change to the script: one scene-sized paragraph per block, bracketed
+directions kept on their own lines where they already stand alone, LaTeX in
+`$…$` and `$$…$$`. List in `spelling.md` every bracket you read as
+mathematics rather than as a direction, and every one you were unsure of.
 
 Commit, and give the user `script.md` and `spelling.md` in chat.
 
@@ -165,7 +187,7 @@ enough that the Python is transcription rather than invention, and it obeys
 - every transition, named by the Manim animation that will perform it;
 - what the scene inherits from the previous one and what it leaves behind.
 
-Where the script's parenthesised description is silent — and it usually is —
+Where the script's stage direction is silent — and it usually is —
 decide, and mark the decision with `[fill]` so that the user can see at a glance
 what was yours rather than theirs.
 
@@ -226,8 +248,8 @@ subtitle font that `scripts/subfont.py` builds (Unicode has no subscript %).
 Burn previews and the final video with that font, and use it for the subtitles
 of any web page that plays the videos.
 
-Add nothing to the narration and drop nothing from it. A parenthesised
-description never becomes a subtitle.
+Add nothing to the narration and drop nothing from it. A stage direction
+never becomes a subtitle; a parenthesis in the narration always does.
 
 ### 3f. One directory per scene
 
