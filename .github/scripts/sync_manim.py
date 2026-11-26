@@ -7,9 +7,10 @@ one, on main ("here"). The other repository is "there".
     python3 .github/scripts/sync_manim.py --check   # report, change nothing
     python3 .github/scripts/sync_manim.py           # sync, and push both
 
-The workflow .github/workflows/sync-manim-video.yml runs it after every push
-to main that touches the skill. A session that edited the skill may run it
-itself right after pushing, so as not to wait for the workflow.
+Nothing runs it automatically: the rule in both repositories' CLAUDE.md is
+that the session that changes the skill runs it, right after pushing, and
+checks with --check that the two copies agree. It uses the session's own git
+credentials; no token or secret is involved.
 
 It decides by content, not by who pushed last. The git tree hash of the skill
 directory names its exact contents, and is the same in both repositories for
@@ -20,10 +21,9 @@ applied to the other.
 
     only one side changed since the base   that side is copied to the other
     both changed, and the merge is clean   the merge goes to both
-    both changed the same lines            nothing changes, exit 1 (the
-                                           workflow run fails, and GitHub
-                                           e-mails the owner): merge by hand,
-                                           in either copy, and push
+    both changed the same lines            nothing changes, exit 1: show the
+                                           conflict to the user, merge by hand
+                                           in either copy, push, and run again
 
 Every commit it makes bumps the patch version of that repository's plugin
 (.claude-plugin/plugin.json, and metadata.version of marketplace.json), since
@@ -215,9 +215,7 @@ def main():
     here = this_repo()
     there = other_repo(here)
     if git("remote", "get-url", "there", check=False).returncode:
-        token = os.environ.get("SYNC_TOKEN")
-        auth = f"x-access-token:{token}@" if token else ""
-        git("remote", "add", "there", f"https://{auth}github.com/{there}.git")
+        git("remote", "add", "there", f"https://github.com/{there}.git")
 
     for attempt in range(3):         # a push loses a race: fetch and decide again
         if once(here, there, args.check):
