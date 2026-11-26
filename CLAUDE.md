@@ -14,7 +14,29 @@ skills/
   manim-video/       # the skill: SKILL.md, references/, scripts/
 .github/
   scripts/sync_manim.py   # keeps the skill identical with AI_TOOLS (see below)
+  workflows/skill-zip.yml # publishes the skill as a zip (release "skill")
+index.html           # the page about the skill (GitHub Pages), Hebrew and English
+site/                # the page's icons, and icon.py that renders them with Manim
+.nojekyll
 ```
+
+## The page
+
+`index.html` is the skill's public page, served by GitHub Pages from `main`
+at https://rami5743.github.io/AI_MANIM/. Hebrew is the default; every piece of
+text exists in both languages (`data-l="he"` / `data-l="en"`), and the flag
+buttons switch between them (`#en` in the address opens English). Keep the
+two languages saying the same thing.
+
+The page describes the skill — what it does, how to install and use it, how
+to write a script, and a ready prompt — so **a change to the skill that
+changes any of that (the script format, the install steps, the stages, the
+reading rate) is a change to the page too**, in the same session.
+
+The download is the release asset
+`https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip`,
+rebuilt by `.github/workflows/skill-zip.yml` on every push that changes the
+skill. It uses the token GitHub gives every run; no secret is involved.
 
 ## The mirrored skill
 
@@ -65,5 +87,6 @@ claude plugin validate .claude-plugin/plugin.json
 
 - Work on `main`. No feature branches or pull requests unless asked.
 - `name` in the skill's frontmatter equals its directory name.
-- Nothing is committed here that is not the skill, a manifest, the sync, or
+- Nothing is committed here that is not the skill, a manifest, the sync, the
+  zip workflow, the page (`index.html`, `site/`, `.nojekyll`), the README, or
   these notes.

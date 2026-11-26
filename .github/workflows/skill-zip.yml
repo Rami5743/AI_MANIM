@@ -1,0 +1,47 @@
+# Publish skills/manim-video as a zip, the download the page links to:
+#   https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
+# Runs on every push to main that changes the skill. Uses only the token GitHub
+# gives every workflow run (no secret to set up).
+name: Skill zip
+
+on:
+  push:
+    branches: [main]
+    paths: ["skills/manim-video/**", ".github/workflows/skill-zip.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: skill-zip
+  cancel-in-progress: true
+
+jobs:
+  zip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the zip
+        run: |
+          cd skills
+          find manim-video -name __pycache__ -prune -exec rm -rf {} +
+          zip -qr ../manim-video.zip manim-video
+          cd ..
+          unzip -l manim-video.zip | tail -1
+
+      - name: Publish it as the latest release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(python3 -c "import json; print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          notes="The manim-video skill, version $version (commit ${GITHUB_SHA::7}). Unzip it into ~/.claude/skills/ or into a project's .claude/skills/. See https://rami5743.github.io/AI_MANIM/"
+          git tag -f skill
+          git push -f origin skill
+          if gh release view skill >/dev/null 2>&1; then
+            gh release edit skill --title "manim-video skill $version" --notes "$notes" --latest
+          else
+            gh release create skill --title "manim-video skill $version" --notes "$notes" --latest
+          fi
+          gh release upload skill manim-video.zip --clobber
