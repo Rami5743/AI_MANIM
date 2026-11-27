@@ -293,7 +293,10 @@ formula is short on the page and long in the mouth: imagine it read aloud and
 count that — $r_{1\%}$ is "אר אחוז", $\ln p/p$ is "לוג פה חלקי פה". The project
 keeps a table of how each formula and number of its narration is read
 (`readings.py` beside `narration.py`), and `scripts/syllables.py` counts a cue
-from it: a run with no reading is an error, not a zero. Hebrew words written
+from it: a run with no reading is an error, not a zero. Hebrew readings carry
+niqqud (p is "פִּי"), so that the same table can drive a speech engine; the
+count ignores the niqqud, but a spelling that drops a letter (defective
+spelling) changes it, so vocalize the plene spelling. Hebrew words written
 without vowels are estimated from their letters (see the script).
 
 The rate is the user's: the first project began at 13 characters per second,

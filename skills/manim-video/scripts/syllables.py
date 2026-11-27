@@ -27,7 +27,8 @@ Rules:
 """
 import json, math, re, sys, unicodedata
 
-HEB = re.compile(r"[א-תװ-ײ]+")
+NIQQUD = re.compile(r"[\u0591-\u05C7]")   # Hebrew vowel points and cantillation
+HEB = re.compile(r"[\u05D0-\u05EA\u05F0-\u05F2][\u0591-\u05C7\u05D0-\u05EA\u05F0-\u05F2]*")   # niqqud allowed
 # an English word: two letters or more, or a contraction (let's, don't, I'm);
 # a single letter is a variable or "a"/"I", and needs a reading
 # (Latin letters with diacritics included: Vallée, Poussin, Gödel)
@@ -37,7 +38,8 @@ NEUTRAL = re.compile(r"[\s,.:;?!\"'״׳()\-–—⁦-⁩]+")
 
 
 def hebrew_word(w):
-    return max(1, math.floor(0.55 * len(w) + 0.5))
+    letters = NIQQUD.sub("", w)    # niqqud says how a word sounds, not how long it is
+    return max(1, math.floor(0.55 * len(letters) + 0.5))
 
 
 def english_word(w):
@@ -78,7 +80,11 @@ def spoken(text, readings):
     return "".join(out)
 
 
+
+
 def count(text, readings=None):
+    """Syllables. Niqqud, in a reading or in the narration, is allowed and does
+    not change the count."""
     said = spoken(text, readings or {})
     return (sum(hebrew_word(w) for w in HEB.findall(said))
             + sum(english_word(w) for w in LAT.findall(said)))
