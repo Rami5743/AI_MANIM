@@ -61,6 +61,10 @@ complaint of a native speaker, and kept only when the speaker heard it fixed.
      (רימן: every mark came out "riMAN"; check that a variant differs from
      plain text before playing it) is said as two adjacent `<phoneme>`s with
      no space: `<phoneme ph="riˈ">רי</phoneme><phoneme ph="man">מן</phoneme>`;
+   - **the last word of a phrase** (before punctuation, or the last of a cue)
+     gets a stress mark if it has none: unstressed, "זה" at the end of
+     "בטווח זה," came out wrong. Do it in the SSML builder, for every word,
+     not in the lexicon;
    - a Hebrew prefix joined to a formula by a hyphen ("מ-n", "ב-p₁%(n)") makes
      one `<phoneme>` with it, stress on the formula, a glottal stop between two
      vowels: `meˈʔen`. The hyphen made the engine pause; so did a space.
@@ -80,11 +84,14 @@ complaint of a native speaker, and kept only when the speaker heard it fixed.
 
 ## The voice
 
-`he-IL-HilaNeural` (or `he-IL-AvriNeural`) with IPA. The HD voice
-(`he-IL-Hila:DragonLatestNeural`) reads plain text more fluently, but with IPA
-it drifted into a heavy American accent mid-sentence, and plain text cannot be
-corrected. Use HD only for text with no IPA at all, and only if the user
-prefers it.
+The HD voice (`he-IL-Hila:DragonLatestNeural`) with IPA sounds better — the
+user preferred its tone — but it fails more: once it slid into an American
+accent for a whole sentence, and it reads some words differently from the
+standard voice from the same IPA (עכשיו as `ˈaxʃav` came out wrong; `axˈʃav`
+right). So: HD by default, with a **per-sentence fallback** to
+`he-IL-HilaNeural` (a list of sentences, keyed by their first cue) for the
+sentences where HD misbehaves and no IPA change fixes it. Switching voices
+re-opens words that were settled with the other voice: replay them.
 
 ## Measuring without ears
 

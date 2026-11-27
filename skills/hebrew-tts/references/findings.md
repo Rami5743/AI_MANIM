@@ -73,6 +73,7 @@ the same way (the voice knows no `ˌ`).
 | "בסיס e": e swallowed | `basis i` → "basisi" | `ˈʔi` (glottal stop + stress), as a separate `<phoneme>` |
 | the כ of כפונקציה almost unheard | unstressed prefix syllable reduced | secondary stress: `ˌkeˈfunktsja` (Azure: `keˈfuˈnktsja`) |
 | a pause before a lone "n" at a sentence's end | unstressed one-syllable `<phoneme>` | stress mark on every one-syllable formula reading |
+| "זה" mangled at the end of "נרוץ על כל המספרים בטווח זה," | an unstressed word ending a phrase | the SSML builder stresses the last word before punctuation or at the end of a cue (here 4 more words: זה, כך, כאן) |
 | the same pause before "n" at the end of "p₁%(n)" ("pi axuz ʃel ʔen") | the unstressed letter name inside a longer reading | stress mark on **every** letter name and "log" in every reading (`ˈpi aˈxuz ʃel ˈʔen`); 3.15 s → 2.55 s |
 | "מ-n" with a pause, like a comma | the hyphen; a space was no better | prefix + formula as one `<phoneme>`: `meˈʔen` |
 | a pause before "e" like a comma | a `<break>` inserted to separate it | no break; glottal stop instead |
