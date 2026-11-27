@@ -26,6 +26,7 @@ as right. Reuse these as they are.
 | זה (ending a phrase) | `ˈze` | unstressed: mangled |
 | היוריסטיקה | `heuˈristika` | `hejuristika`: the ה like the article |
 | משעשעת | `meʃaʔaˈʃaʔat` | `meʃaʃaʔat`: a syllable missing |
+| לסקלה | `le` + `ˈskala`, two adjacent `<phoneme>`s (HD) | `lisˈkala` and every one-word spelling: stress heard in the wrong place |
 | מ-n | `meˈʔen` (one `<phoneme>`) | a pause at the hyphen |
 | מהפכנית, המהפכניים | `mahapxaˈnit`, `hamahapxaniˈjim` | `mahpexanit` (the grammar book's) |
 | רימן | `ˈri` + `man`, two adjacent `<phoneme>`s | every single-phoneme spelling came out "riMAN" |
