@@ -340,6 +340,16 @@ subtitle files with the cumulative offsets, into `final/`. Use
 `scripts/assemble.py`. Check the join: play the seams, confirm no scene was
 dropped and no subtitle drifted, and confirm the total matches `scenes.md`.
 
+**Redo only what changed.** A fix to one scene re-renders that scene, and a
+neighbour only if it inherits the changed picture (the next scene opens on the
+last frame of this one). Everything is re-rendered only when every scene's
+timing changes, as with a new reading rate. Joining encodes nothing: the
+scenes are joined by stream copy, and with `--burn` the burned-in copy is the
+scenes' own subtitled previews joined the same way, as long as each preview
+is newer than its render and its subtitles. So a tool that regenerates
+subtitles or timings must leave a file untouched when its content is the same,
+or every preview looks stale and the whole video is burned again.
+
 Commit the final video and its subtitle track, push, and hand the user the file
 in chat.
 

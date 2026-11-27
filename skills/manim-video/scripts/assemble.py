@@ -10,9 +10,13 @@ lexical order — which is why they are numbered `01`, `02`, …. Each contribut
 the one `.mp4` under its `out/` and, if present, its `subtitles.srt`. The
 default output is `<project>/final/<project name>.mp4` with the merged track
 beside it. `--burn` also writes `<name>-subtitled.mp4`, the same video with
-the merged track burned into the picture (in the style of the previews), in
-the subtitle font of subfont.py when `<project>/fonts/SubtitleSans.ttf`
-exists (or `--fonts DIR`).
+the subtitles burned into the picture. With `--project`, when every scene has
+a subtitled preview (`preview/<name>-subtitled.mp4`) at least as new as its
+render and its subtitles, those are joined by stream copy: nothing is encoded
+again, and a scene that did not change keeps its preview. Otherwise the whole
+video is burned from the merged track (in the style of the previews), in the
+subtitle font of subfont.py when `<project>/fonts/SubtitleSans.ttf` exists (or
+`--fonts DIR`).
 
 Scenes can also be listed by hand:
 
@@ -116,6 +120,26 @@ def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
     if not videos:
         sys.exit("no approved scene videos found")
     return videos, subs, names
+
+
+def burned_previews(videos: list[str], subs: list[str | None]) -> list[str] | None:
+    """The scenes' own subtitled previews (preview/<name>-subtitled.mp4, beside
+    out/), when every scene has one at least as new as its render and its
+    subtitles. Joining them by stream copy gives the burned-in video without
+    encoding anything again: a scene that did not change keeps the preview it
+    already had. None if any scene lacks a current preview."""
+    found = []
+    for video, srt in zip(videos, subs):
+        scene = os.path.dirname(os.path.dirname(os.path.abspath(video)))
+        name = os.path.splitext(os.path.basename(video))[0]
+        prev = os.path.join(scene, "preview", name + "-subtitled.mp4")
+        if not os.path.exists(prev):
+            return None
+        newest = max([os.path.getmtime(video)] + ([os.path.getmtime(srt)] if srt else []))
+        if os.path.getmtime(prev) < newest:
+            return None
+        found.append(prev)
+    return found
 
 
 # The style of the burned-in subtitles: the one review-loop.md uses for previews.
@@ -235,6 +259,15 @@ def main() -> None:
     concat(videos, out, None)
     if args.burn:
         burned = os.path.splitext(out)[0] + "-subtitled.mp4"
+        previews = burned_previews(videos, subs) if args.project else None
+        if previews:
+            concat(previews, burned, None)
+            print(f"wrote {os.path.abspath(burned)}  (the scenes' subtitled previews, joined)")
+            if abs(duration(burned) - total) > 0.25:
+                print("  WARNING: the joined previews are not the length of the video.")
+            print(f"wrote {os.path.abspath(out)}  ({duration(out):.2f} s)")
+            return
+        print("  some scene has no current subtitled preview: burning the whole video")
         fonts = args.fonts
         if fonts is None and args.project:
             fonts = os.path.join(args.project, "fonts")
