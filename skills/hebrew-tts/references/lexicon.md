@@ -22,6 +22,10 @@ as right. Reuse these as they are.
 | שהובילה | `ʃehoˈvila` | final stress |
 | הסכום | `hasˈxum` | k |
 | מלמעלה ומלמטה | `mileˈmala umileˈmata` | `milmala` |
+| עכשיו | `axˈʃav` | `ˈaxʃav` was right with the standard voice, wrong with HD |
+| זה (ending a phrase) | `ˈze` | unstressed: mangled |
+| היוריסטיקה | `heuˈristika` | `hejuristika`: the ה like the article |
+| משעשעת | `meʃaʔaˈʃaʔat` | `meʃaʃaʔat`: a syllable missing |
 | מ-n | `meˈʔen` (one `<phoneme>`) | a pause at the hyphen |
 | מהפכנית, המהפכניים | `mahapxaˈnit`, `hamahapxaniˈjim` | `mahpexanit` (the grammar book's) |
 | רימן | `ˈri` + `man`, two adjacent `<phoneme>`s | every single-phoneme spelling came out "riMAN" |
