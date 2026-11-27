@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Keep skills/manim-video identical in Rami5743/AI_TOOLS and Rami5743/AI_MANIM.
+"""Keep the mirrored skills identical in Rami5743/AI_TOOLS and Rami5743/AI_MANIM:
+skills/manim-video, and skills/hebrew-tts (the spoken Hebrew narration). Each
+directory is synced on its own, as below.
 
 This file is the same in both repositories. Run it from a checkout of either
 one, on main ("here"). The other repository is "there".
@@ -31,7 +33,8 @@ consumers see an update only through the version.
 """
 import argparse, os, re, subprocess, sys, tempfile
 
-PATH = "skills/manim-video"
+PATHS = ("skills/manim-video", "skills/hebrew-tts")
+PATH = PATHS[0]                  # the directory being synced; set by main()
 PAIR = ("Rami5743/AI_TOOLS", "Rami5743/AI_MANIM")
 BRANCH = "main"
 
@@ -217,11 +220,14 @@ def main():
     if git("remote", "get-url", "there", check=False).returncode:
         git("remote", "add", "there", f"https://github.com/{there}.git")
 
-    for attempt in range(3):         # a push loses a race: fetch and decide again
-        if once(here, there, args.check):
-            return
-        print("  a push was rejected; trying again")
-    sys.exit("could not push after 3 attempts")
+    global PATH
+    for PATH in PATHS:
+        for attempt in range(3):     # a push loses a race: fetch and decide again
+            if once(here, there, args.check):
+                break
+            print("  a push was rejected; trying again")
+        else:
+            sys.exit("could not push after 3 attempts")
 
 
 if __name__ == "__main__":

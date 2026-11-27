@@ -23,5 +23,9 @@ The rules it animates by (how a zoom moves, when things fade and when they
 move, how the picture keeps time with the narration) are in
 `skills/manim-video/references/animation-rules.md`.
 
-The same skill is also part of `Rami5743/AI_TOOLS`; the two copies are kept
-identical (see `CLAUDE.md`).
+A second skill, **hebrew-tts**, gives such a video a spoken Hebrew narration:
+a speech engine (Azure) reads every word from IPA with its stress marked, one
+sentence at a time at its subtitle's time (`skills/hebrew-tts/SKILL.md`).
+
+Both skills are also part of `Rami5743/AI_TOOLS`; the two copies of each are
+kept identical (see `CLAUDE.md`).

@@ -1,8 +1,10 @@
 # AI_MANIM
 
 This repository is a **Claude Code marketplace** whose content is one
-**plugin** holding one **skill**, `manim-video`: it turns a narration script
-into an animated explainer video rendered with Manim.
+**plugin** holding two **skills**: `manim-video`, which turns a narration
+script into an animated explainer video rendered with Manim, and
+`hebrew-tts`, which makes a speech engine read a Hebrew narration right (the
+spoken narration of such a video).
 
 ## Layout
 
@@ -12,8 +14,9 @@ into an animated explainer video rendered with Manim.
   plugin.json        # plugin manifest: name, version, "skills": ["./skills"]
 skills/
   manim-video/       # the skill: SKILL.md, references/, scripts/
+  hebrew-tts/        # the spoken Hebrew narration: SKILL.md, references/, scripts/
 .github/
-  scripts/sync_manim.py   # keeps the skill identical with AI_TOOLS (see below)
+  scripts/sync_manim.py   # keeps both skills identical with AI_TOOLS (see below)
   workflows/skill-zip.yml # publishes the skill as a zip (release "skill")
 index.html           # the page about the skill (GitHub Pages), Hebrew and English
 site/                # the page's icons, and icon.py that renders them with Manim
@@ -40,13 +43,13 @@ The download is the release asset
 rebuilt by `.github/workflows/skill-zip.yml` on every push that changes the
 skill. It uses the token GitHub gives every run; no secret is involved.
 
-## The mirrored skill
+## The mirrored skills
 
-`skills/manim-video/` exists, identical, in two repositories:
+`skills/manim-video/` and `skills/hebrew-tts/` exist, identical, in two repositories:
 `Rami5743/AI_MANIM` (this one) and `Rami5743/AI_TOOLS` (the owner's general
 plugin). Either copy may be edited, from any session.
 
-**Rule: every change to `skills/manim-video/` is synced to the other
+**Rule: every change to `skills/manim-video/` or `skills/hebrew-tts/` is synced to the other
 repository in the same session, before the work is reported done.** Nothing
 does it automatically.
 
@@ -88,7 +91,7 @@ claude plugin validate .claude-plugin/plugin.json
 ## Rules
 
 - Work on `main`. No feature branches or pull requests unless asked.
-- `name` in the skill's frontmatter equals its directory name.
-- Nothing is committed here that is not the skill, a manifest, the sync, the
+- `name` in a skill's frontmatter equals its directory name.
+- Nothing is committed here that is not one of the two skills, a manifest, the sync, the
   zip workflow, the page (`index.html`, `site/`, `.nojekyll`), the README, or
   these notes.
