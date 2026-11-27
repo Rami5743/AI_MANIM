@@ -301,6 +301,11 @@ count ignores the niqqud, but a spelling that drops a letter (defective
 spelling) changes it, so vocalize the plene spelling. Hebrew words written
 without vowels are estimated from their letters (see the script).
 
+**A spoken narration** (a speech engine reading it under the video) is the
+hebrew-tts skill's work, for Hebrew: niqqud does not make an engine read
+right; IPA with marked stress does, one sentence per request, each laid at
+its cue's start. It reuses `timing.json` and the readings above.
+
 The rate is the user's: the first project began at 13 characters per second,
 which on its narration was 5.94 syllables per second, and the user settled on
 15% below that, the shortest and longest cue growing in proportion. Record it
