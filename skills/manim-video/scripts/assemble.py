@@ -11,7 +11,13 @@ the one `.mp4` under its `out/` and, if present, its `subtitles.srt`. The
 default output is `<project>/final/<project name>.mp4` with the merged track
 beside it. Subtitles in other languages, `subtitles.<lang>.srt` in the scene
 directories (same times as the scene's cues), are merged the same way into
-`<project name>.<lang>.srt`; the burned-in copy carries the main track only. `--burn` also writes `<name>-subtitled.mp4`, the same video with
+`<project name>.<lang>.srt`; the burned-in copy carries the main track only.
+
+A version in another language (`--lang en`) differs from the main one only in
+the words on screen: a scene whose words differ has its own render in
+`out-<lang>/`, every other scene is shared. It is joined from those, with
+`subtitles.<lang>.srt`, into `<project name>.<lang>.mp4`, and with `--burn`
+from the scenes' `*-<lang>-subtitled.mp4` previews. `--burn` also writes `<name>-subtitled.mp4`, the same video with
 the subtitles burned into the picture. With `--project`, when every scene has
 a subtitled preview (`preview/<name>-subtitled.mp4`) at least as new as its
 render and its subtitles, those are joined by stream copy: nothing is encoded
@@ -98,7 +104,7 @@ def stamp(seconds: float) -> str:
     return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
 
 
-def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
+def collect(project: str, lang: str | None = None) -> tuple[list[str], list[str | None], list[str]]:
     scenes_dir = os.path.join(project, "scenes")
     if not os.path.isdir(scenes_dir):
         sys.exit(f"no scenes directory at {scenes_dir}")
@@ -106,6 +112,8 @@ def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
     for name in sorted(os.listdir(scenes_dir)):
         scene = os.path.join(scenes_dir, name)
         out = os.path.join(scene, "out")
+        if lang and os.path.isdir(os.path.join(scene, f"out-{lang}")):
+            out = os.path.join(scene, f"out-{lang}")   # this scene's words differ in <lang>
         if not os.path.isdir(out):
             print(f"  skipping {name}: no out/ directory, so it is not approved")
             continue
@@ -116,7 +124,7 @@ def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
         if len(mp4s) > 1:
             sys.exit(f"{out} holds {len(mp4s)} videos. Leave exactly one.")
         videos.append(os.path.join(out, mp4s[0]))
-        srt = os.path.join(scene, "subtitles.srt")
+        srt = os.path.join(scene, f"subtitles.{lang}.srt" if lang else "subtitles.srt")
         subs.append(srt if os.path.exists(srt) else None)
         names.append(name)
     if not videos:
@@ -124,7 +132,8 @@ def collect(project: str) -> tuple[list[str], list[str | None], list[str]]:
     return videos, subs, names
 
 
-def burned_previews(videos: list[str], subs: list[str | None]) -> list[str] | None:
+def burned_previews(videos: list[str], subs: list[str | None],
+                    lang: str | None = None) -> list[str] | None:
     """The scenes' own subtitled previews (preview/<name>-subtitled.mp4, beside
     out/), when every scene has one at least as new as its render and its
     subtitles. Joining them by stream copy gives the burned-in video without
@@ -134,7 +143,7 @@ def burned_previews(videos: list[str], subs: list[str | None]) -> list[str] | No
     for video, srt in zip(videos, subs):
         scene = os.path.dirname(os.path.dirname(os.path.abspath(video)))
         name = os.path.splitext(os.path.basename(video))[0]
-        prev = os.path.join(scene, "preview", name + "-subtitled.mp4")
+        prev = os.path.join(scene, "preview", name + (f"-{lang}" if lang else "") + "-subtitled.mp4")
         if not os.path.exists(prev):
             return None
         newest = max([os.path.getmtime(video)] + ([os.path.getmtime(srt)] if srt else []))
@@ -223,15 +232,20 @@ def main() -> None:
     parser.add_argument("--out", help="the joined video")
     parser.add_argument("--fonts", help="directory holding SubtitleSans.ttf (subfont.py); "
                         "default <project>/fonts when it exists")
+    parser.add_argument("--lang", help="with --project: the version in another language — "
+                        "scenes/*/out-<lang>/ where a scene has one (out/ elsewhere), "
+                        "subtitles.<lang>.srt, previews *-<lang>-subtitled.mp4; "
+                        "writes final/<name>.<lang>.mp4")
     parser.add_argument("--burn", action="store_true",
                         help="burn the merged subtitles into the picture as well")
     args = parser.parse_args()
 
     if args.project:
-        videos, subs, names = collect(args.project)
+        videos, subs, names = collect(args.project, args.lang)
         out = args.out or os.path.join(
             args.project, "final",
-            os.path.basename(os.path.abspath(args.project)) + ".mp4")
+            os.path.basename(os.path.abspath(args.project))
+            + (f".{args.lang}" if args.lang else "") + ".mp4")
     elif args.videos:
         videos = args.videos
         names = [os.path.basename(v) for v in videos]
@@ -257,7 +271,7 @@ def main() -> None:
     os.makedirs(os.path.dirname(os.path.abspath(srt_out)) or ".", exist_ok=True)
     count = merge_subs(subs, offsets, srt_out)
     print(f"\nwrote {os.path.abspath(srt_out)}  ({count} cues)")
-    if args.project:
+    if args.project and not args.lang:
         # subtitles in other languages: scenes/*/subtitles.<lang>.srt, merged
         # with the same offsets into final/<name>.<lang>.srt
         langs = sorted({f[len("subtitles."):-len(".srt")]
@@ -278,7 +292,7 @@ def main() -> None:
     concat(videos, out, None)
     if args.burn:
         burned = os.path.splitext(out)[0] + "-subtitled.mp4"
-        previews = burned_previews(videos, subs) if args.project else None
+        previews = burned_previews(videos, subs, args.lang) if args.project else None
         if previews:
             concat(previews, burned, None)
             print(f"wrote {os.path.abspath(burned)}  (the scenes' subtitled previews, joined)")

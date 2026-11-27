@@ -400,6 +400,29 @@ or every preview looks stale and the whole video is burned again.
 Commit the final video and its subtitle track, push, and hand the user the file
 in chat.
 
+### Another language
+
+**Subtitles in another language** are a translation cue by cue: one line per
+cue of the narration, in the same order, each taking exactly the times of the
+cue it translates, written to `scenes/*/subtitles.<lang>.srt`. Keep the
+translation in one file next to the narration, and stop when its count and the
+cues' disagree. Measure its rate the same way (syllables, formulas as read
+aloud in that language) and tighten the wording of any cue that runs fast —
+the times stay those of the narration. `scripts/assemble.py` merges them into
+`final/<name>.<lang>.srt`.
+
+**A version of the video in another language** changes nothing but the words
+on screen. Do it with one switch, never with a copy of a scene: every on-screen
+text is defined once with its translations, and the language is chosen at
+render time (an environment variable). A line that mixes words with a formula
+is built from pieces in reading order, so that right to left and left to right
+come from the same code; check that the main language renders exactly as
+before (compare the points). Only the scenes whose words differ, and those
+that open on their last frame, are rendered again, into `out-<lang>/`; every
+other scene is shared. `scripts/assemble.py --project <p> --lang <lang>
+--burn` joins the version and its subtitled previews into
+`final/<name>.<lang>.mp4`.
+
 ## How the run is driven
 
 - **The stages run one after another without stopping for approval.** The user
