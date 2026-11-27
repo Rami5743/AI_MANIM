@@ -32,10 +32,12 @@ complaint of a native speaker, and kept only when the speaker heard it fixed.
    phone set: five vowels a e i o u, and p b t d k ɡ ʔ f v s z ʃ x h t͡s m n l
    ʁ j ʒ tʃ dʒ). Standard notation in the source: `ˈ` before the stressed
    syllable, `ˌ` before a secondary stress. Modern spoken Hebrew, not the
-   grammar book: טווח is `tvax`, בטווח `beˈtvax`, כמו `kmo`, צריכים `t͡sriˈxim`;
+   grammar book: טווח is `tvax`, כמו `kmo`, צריכים `t͡sriˈxim`;
    but בדיוק `bediˈjuk`. Check the pattern stress: הפעיל in the past is stressed
    on the penult (`hoˈvila`, `vehoˈxixu`, `himˈt͡siʔu`); a noun and a verb
-   spelled alike differ (סְכוּם `sxum`, לִסְכֹּם `lisˈkom`).
+   spelled alike differ (סכום `sxum`). The article is heard or not by the
+   phrase: "בטווח הזה" `baˈtvax`, but "בטווח זה" `beˈtvax`; "כשלראשוני p"
+   (any prime) `keʃeleriʃoˈni`. Ask when unsure; the user hears it at once.
 
 2. **Convert the stress for Azure** with `scripts/azure_stress.py`: Azure's
    Hebrew voices read a `ˈ` as marking **the vowel before it**, so every mark

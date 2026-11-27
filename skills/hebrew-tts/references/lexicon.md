@@ -12,7 +12,10 @@ as right. Reuse these as they are.
 |---|---|---|
 | נסמן | `nesaˈmen` | stress one syllable early (mark placement, see findings §3) |
 | המספרים | `hamispaˈrim` | "msafrim" from niqqud |
-| טווח, בטווח, הטווח | `ˈtvax`, `beˈtvax`, `haˈtvax` | `tevax`, `batvax` |
+| טווח, הטווח | `ˈtvax`, `haˈtvax` | `tevax` |
+| בטווח זה / בטווח הזה | `beˈtvax` / `baˈtvax` | the article by the phrase |
+| לסכום, שלסכום | `lisˈxom`, `ʃelisˈxom` | `lisˈkom` |
+| כשלראשוני (indefinite) | `keʃeleriʃoˈni` | `keʃelariʃoˈni` |
 | כפונקציה | `ˌkeˈfunktsja` | כ almost unheard |
 | וכך הלאה | `veˈxax ʔˈhalʔa` | read as one word |
 | די קל לענות | `dej ˈkal laʔaˈnot` | "קלה" |
@@ -494,7 +497,7 @@ word is reused in another form.
 | שלה | `ʃeˈla` |
 | שלהם | `ʃelaˈhem` |
 | שלנו | `ʃeˈlanu` |
-| שלסכום | `ʃelisˈkom` |
+| שלסכום | `ʃelisˈxom` |
 | שמדובר | `ʃemeduˈbar` |
 | שמתחלק | `ʃemitxaˈlek` |
 | שמתנהג | `ʃemitnaˈheɡ` |

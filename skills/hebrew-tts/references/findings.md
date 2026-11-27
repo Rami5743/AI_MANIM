@@ -84,6 +84,11 @@ Before playing variants, check they differ from each other and from plain
 text (decode both, compare samples): five of nine "different" spellings of
 רימן came out the same audio.
 
+When HD gets a settled word wrong and no IPA fixes it, move the sentence to
+the standard voice (in the PNT video: ולז'נדר, במקום — its i dropped —,
+ההרמוני — stress —, לסכום, and "בסיס e"). The user judged these by ear as HD
+faults; do not spend variants on them.
+
 Variants that were judged worse: a short `<break>` between words (heard as a
 comma); spelling the letter as Hebrew text (`<sub alias="אִי">`); a glottal
 stop after the word instead of before the next.
@@ -92,13 +97,15 @@ stop after the word instead of before the next.
 
 The engine said what it was told; the transcription was wrong:
 
-- **טווח** is `tvax`, not the segolate `tevax`; and **בטווח** `beˈtvax`, not
-  `baˈtvax` (the definite form is grammatical before הזה, but nobody says it).
+- **טווח** is `tvax`, not the segolate `tevax`. **בטווח** follows the phrase:
+  "בטווח זה" `beˈtvax`, but "בטווח הזה" `baˈtvax` (definite; the user
+  corrected both ways). "כשלראשוני p" is indefinite: `keʃeleriʃoˈni`.
   The same for באחוזים נמוכים: indefinite, `be-`.
 - **הפעיל, past, 3rd plural and 3rd feminine**: penult stress — `vehoˈxixu`,
   `himˈt͡siʔu`, `ʃehoˈvila`. Easy to get wrong by analogy with פיעל
   (`ʃiʔaˈru`, final stress).
-- **סְכוּם** (a sum) `sxum`, with x; the verb לִסְכֹּם `lisˈkom`, with k.
+- **סכום** (a sum) `sxum`, with x; and the verb **לסכום** too, as spoken:
+  `lisˈxom` (the grammar book's `lisˈkom`, with k, was heard as wrong).
 - **מלמעלה ומלמטה**: `mileˈmala umileˈmata` (spoken), not `milˈmala`.
 - **ויכולה**: `vixoˈla`, not `vijxoˈla`.
 - **מהפכנית**: spoken `mahapxaˈnit`, not the grammar book's `mahpexaˈnit`.
