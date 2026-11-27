@@ -143,12 +143,59 @@ verbatim and say in the commit message that it came from chat.
 Produce `script/script.md`: the same script with spelling, typos and obvious
 grammatical slips corrected, and nothing else.
 
-This stage is the `fix-spelling` skill's subject matter. Invoke that skill and
-let it run the pass, with the same boundary it always keeps: **one correction
-that is certain, or no correction at all.** A word that may be deliberate, a
-term that may be the user's own coinage, a formula that may be wrong rather than
-mistyped — those go into `script/spelling.md` as questions, not into the file.
-Tag them `P1`, `P2`, … so the user can answer by quoting a tag.
+The rules are below, complete. (If a `fix-spelling` skill is installed, it
+is the same discipline for a paper; these rules are what it comes to for a
+script.) The whole design is one boundary: **a correction that is certain goes
+in; one that is not goes to the user as a question, never into the file.**
+
+**Read it all, in order, at the pace of reading** — not with a spell checker or
+a search for suspicious words, which miss the typo that makes a real word (form
+for from, a dropped word, a verb that no longer agrees). Read the formulas
+closely enough to see which letter stands for what, and read the stage
+directions too. Keep a list while reading (the line, the exact string, the
+correction, certain or not) and apply it afterwards: editing while reading is
+how the reading stops being careful.
+
+**Corrected, when certain:**
+
+- spelling, including a proper name spelled wrong;
+- a typo that makes a real word, where the sentence leaves no doubt;
+- a doubled word, a word plainly dropped;
+- grammar: agreement, number, gender, a wrong preposition in a fixed phrase;
+- punctuation that is plainly wrong, an unmatched bracket or quotation mark;
+- a slip of the pen inside a formula: a variable called by the wrong name, an
+  index the rest of the line fixes otherwise, a mismatched delimiter.
+
+**Certain** means you can name the rule that is broken, and there is exactly
+one correction. It is not certain when two corrections are reasonable and say
+different things, when the sentence might be right under another reading, when
+the usage might be the user's own (check the rest of the script first), when
+the correction depends on what the mathematics says rather than on the
+sentence, or when the phrase is merely clumsy — that is style. When in doubt,
+it is not certain.
+
+**Never touched:** the wording, the order and the length of the narration
+(style is not corrected, and not reported either unless it is ambiguous); the
+user's terminology and anything the script defines; spelling variants used
+consistently (in Hebrew, full or defective spelling; in English, British or
+American); and the mathematics. A slip of the pen is a place where the formula
+and what the script means came apart; a value, an exponent, a sign, a
+quantifier or the direction of an inequality is a claim, and a claim that
+looks wrong is reported, never repaired.
+
+Apply the corrections with a script, as exact strings, aborting if a string
+does not occur the expected number of times — never a loose replacement of a
+short word.
+
+`script/spelling.md` holds the report, in three sections, each item tagged so
+the user can answer by quoting the tag. Tags are assigned once and never
+reused; a later pass appends with the next free number.
+
+| Section | Tags | What |
+|---|---|---|
+| Corrections applied | `A1`, `A2`, … | before and after, so the user can spot-check the silent edits |
+| Left for the user | `Q1`, `Q2`, … | the text, the candidate corrections, why it is not certain |
+| Other things noticed | `O1`, `O2`, … | anything else seen on the way: a direction that contradicts the narration, a formula that looks wrong, a term used before it is introduced |
 
 While reading, also normalise the mechanical shape of the file, which is not a
 change to the script: one scene-sized paragraph per block, bracketed
@@ -378,7 +425,7 @@ in chat.
   that is all that ever happens to the user's words.
 - The mathematics is not changed. A formula in the script that looks wrong is
   reported, not corrected — the exception is a slip of the pen that stage 2 is
-  certain of, which is `fix-spelling`'s own rule.
+  certain of (see its rules).
 - The plan is not retrofitted to the code. If stage 5 shows that a scene cannot
   be built as planned, edit `description.md` first, say why in the commit
   message, and then write the Python against the edited plan.
