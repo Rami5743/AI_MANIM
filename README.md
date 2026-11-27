@@ -6,8 +6,7 @@ formulas in LaTeX) and it produces an animated explainer video with
 [Manim](https://www.manim.community/), in the style of 3Blue1Brown.
 
 **The page about it, in Hebrew and English: https://rami5743.github.io/AI_MANIM/**
-— what it does, how to install and use it, how to write a script, and a ready
-prompt.
+— what it does, how to write a script, and a ready prompt.
 
 ## Installing
 

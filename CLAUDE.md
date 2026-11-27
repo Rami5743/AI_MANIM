@@ -28,10 +28,12 @@ text exists in both languages (`data-l="he"` / `data-l="en"`), and the flag
 buttons switch between them (`#en` in the address opens English). Keep the
 two languages saying the same thing.
 
-The page describes the skill — what it does, how to install and use it, how
-to write a script, and a ready prompt — so **a change to the skill that
-changes any of that (the script format, the install steps, the stages, the
-reading rate) is a change to the page too**, in the same session.
+The page is short on purpose (the owner cut it down): what the skill does and
+what it needs, how to write a script (a table and one plain, uncoloured
+example), and a ready prompt that only says where to get the skill. **A change
+to the skill that changes any of that (the script format, where it runs, how
+to get it) is a change to the page too**, in the same session. Do not grow the
+page back into a manual: the skill itself is the manual.
 
 The download is the release asset
 `https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip`,

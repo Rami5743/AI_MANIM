@@ -124,9 +124,7 @@
     width: 1.55rem; height: 1.55rem; border-radius: 50%; display: grid; place-items: center;
     background: var(--code-bg); border: 1px solid var(--line); font-size: .85rem; font-weight: 700;
   }
-  .say { color: var(--text); }
-  .dir { color: var(--red); }
-  .tex { color: var(--blue); direction: ltr; unicode-bidi: isolate; }
+  .tex { direction: ltr; unicode-bidi: isolate; }
   footer { margin-top: 2rem; color: var(--muted); font-size: .88rem; }
 </style>
 </head>
@@ -148,8 +146,8 @@
     <img src="site/icon-512.png" alt="">
     <div>
       <h1><code>manim-video</code></h1>
-      <p class="tagline" data-l="he">סקיל ל־Claude שהופך תסריט לסרטון הסבר מונפש, בסגנון 3Blue1Brown, בעזרת Manim.</p>
-      <p class="tagline" data-l="en">A Claude skill that turns a script into an animated explainer video, in the style of 3Blue1Brown, with Manim.</p>
+      <p class="tagline" data-l="he">סקיל ל־Claude שהופך תסריט לסרטון הסבר מונפש בעזרת Manim.</p>
+      <p class="tagline" data-l="en">A Claude skill that turns a script into an animated explainer video with Manim.</p>
     </div>
   </header>
 
@@ -171,80 +169,13 @@
       <span data-l="he">מה הסקיל עושה</span><span data-l="en">What the skill does</span></h2>
     <p data-l="he">נותנים ל־Claude תסריט, והוא מוביל את כל הדרך עד לסרטון מוגמר. כל שלב נשמר ונדחף לריפו, וכל סצנה נשלחת אליכם לבדיקה ברגע שהיא מוכנה.</p>
     <p data-l="en">You give Claude a script, and it takes it all the way to a finished video. Every stage is saved and pushed to the repository, and every scene is sent to you for review as soon as it is ready.</p>
-    <ol class="stages" data-l="he">
-      <li><b>התסריט נשמר</b> כמו שהוא.</li>
-      <li><b>הגהה:</b> תיקון שגיאות כתיב בלבד. כל דבר שאינו ודאי חוזר אליכם כשאלה.</li>
-      <li><b>תכנון:</b> חלוקה לסצנות, ולכל סצנה תוכנית מפורטת עם זמנים, כתוביות, נוסחאות מדויקות ותמונות שצריך להוריד.</li>
-      <li><b>התקנה:</b> Python, Manim, LaTeX ו־FFmpeg, ברקע.</li>
-      <li><b>מימוש:</b> כל סצנה נכתבת ב־Python, מרונדרת, נבדקת פריים אחר פריים ומתוקנת. אחר כך נשלחת אליכם, עם כתוביות ובלי.</li>
-      <li><b>חיבור:</b> סרטון אחד מכל הסצנות, עם קובץ כתוביות ועם גרסה שהכתוביות צרובות בה.</li>
-    </ol>
-    <ol class="stages" data-l="en">
-      <li><b>The script is saved</b> exactly as given.</li>
-      <li><b>Proofreading:</b> spelling only. Anything uncertain comes back to you as a question.</li>
-      <li><b>The plan:</b> the script is cut into scenes, each with a detailed plan: timings, subtitles, exact formulas, images to download.</li>
-      <li><b>Toolchain:</b> Python, Manim, LaTeX and FFmpeg are installed in the background.</li>
-      <li><b>Implementation:</b> each scene is written in Python, rendered, checked frame by frame and fixed, then sent to you, with and without subtitles.</li>
-      <li><b>Assembly:</b> one video out of all the scenes, with a subtitle file and a version with the subtitles burned in.</li>
-    </ol>
-  </section>
-
-  <!-- ===================== install ===================== -->
-  <section>
-    <h2><span class="dot" style="background:var(--blue)"></span>
-      <span data-l="he">התקנה</span><span data-l="en">Installing</span></h2>
     <p data-l="he">הסקיל צריך סביבה שבה Claude מריץ פקודות ומתקין חבילות: <b>Claude Code</b>, במחשב שלכם (טרמינל או אפליקציה) או בענן (<a href="https://claude.ai/code">claude.ai/code</a>). את כל הכלים הוא מתקין בעצמו.</p>
     <p data-l="en">The skill needs an environment where Claude runs commands and installs packages: <b>Claude Code</b>, on your computer (terminal or app) or in the cloud (<a href="https://claude.ai/code">claude.ai/code</a>). It installs all the tools itself.</p>
-
-    <h3 data-l="he">א. כתוסף של Claude Code (מומלץ)</h3>
-    <h3 data-l="en">A. As a Claude Code plugin (recommended)</h3>
-    <div class="codebox"><pre>claude plugin marketplace add Rami5743/AI_MANIM
-claude plugin install ai-manim@ai-manim</pre><button class="copy" type="button"></button></div>
-
-    <h3 data-l="he">ב. ידנית, מקובץ ה־zip</h3>
-    <h3 data-l="en">B. By hand, from the zip</h3>
-    <p data-l="he">מורידים את <a href="https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip">manim-video.zip</a> ופותחים אותו לאחת התיקיות האלה. כך נוצרת התיקייה <code>manim-video</code>, ובה <code>SKILL.md</code>.</p>
-    <p data-l="en">Download <a href="https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip">manim-video.zip</a> and unzip it into one of these folders, so that it creates <code>manim-video</code> with <code>SKILL.md</code> inside.</p>
-    <div class="tbl"><table>
-      <tr><th data-l="he">תיקייה</th><th data-l="en">Folder</th><th data-l="he">לשימוש</th><th data-l="en">For</th></tr>
-      <tr><td><code>~/.claude/skills/</code></td><td data-l="he">כל הפרויקטים שלכם</td><td data-l="en">all your projects</td></tr>
-      <tr><td><code>&lt;project&gt;/.claude/skills/</code></td><td data-l="he">פרויקט אחד, וכל מי שעובד עליו</td><td data-l="en">one project, and everyone working on it</td></tr>
-    </table></div>
-    <div class="codebox"><pre>curl -L -o manim-video.zip https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
-mkdir -p ~/.claude/skills &amp;&amp; unzip -o manim-video.zip -d ~/.claude/skills/</pre><button class="copy" type="button"></button></div>
-
-    <h3 data-l="he">ג. בלי התקנה</h3>
-    <h3 data-l="en">C. Without installing</h3>
-    <p data-l="he">מדביקים ל־Claude Code את <a href="#prompt">הפרומפט שבהמשך</a>. הוא אומר ל־Claude מאיפה להוריד את הסקיל, איך לקרוא אותו ולפעול לפיו.</p>
-    <p data-l="en">Paste <a href="#prompt">the prompt below</a> into Claude Code. It tells Claude where to download the skill, and to read it and follow it.</p>
+    <p data-l="he">אפשר לתת ל־Claude הערות, תוך כדי עבודה על הסרטון, בהתאם לתוצרים שהוא נתן לכם.</p>
+    <p data-l="en">You can give Claude notes while it works on the video, on whatever it has delivered so far.</p>
   </section>
 
-  <!-- ===================== using it ===================== -->
-  <section>
-    <h2><span class="dot" style="background:var(--red)"></span>
-      <span data-l="he">שימוש</span><span data-l="en">Using it</span></h2>
-    <ol data-l="he">
-      <li>פותחים את Claude Code בריפו שבו ישמר הסרטון.</li>
-      <li>מבקשים סרטון ומדביקים את התסריט. למשל: „תעשה מזה סרטון מאנים”, או <a href="#prompt">הפרומפט המוכן</a>. בלי תסריט, Claude כותב את הסקיל ומחכה.</li>
-      <li>עונים על שאלות ההגהה. כל שאלה מסומנת בתווית (P1, P2, …), אז אפשר לענות בציטוט התווית.</li>
-      <li>צופים בכל סצנה כשהיא מגיעה. הערות נותנים לפי מספר הסצנה והשנייה בה („סצנה 5, שנייה 12: הזום מהיר מדי”), או לפי הזמן בסרטון המלא.</li>
-      <li>כל תיקון מרונדר מחדש ונשלח שוב. רק אחרי שכל הסצנות נשלחו, הן מחוברות לסרטון אחד.</li>
-    </ol>
-    <ol data-l="en">
-      <li>Open Claude Code in the repository the video should live in.</li>
-      <li>Ask for a video and paste the script: "make a Manim video of this", or use <a href="#prompt">the ready prompt</a>. Without a script, Claude only reads the skill and waits.</li>
-      <li>Answer the proofreading questions. Each has a tag (P1, P2, …), so you can answer by quoting it.</li>
-      <li>Watch each scene as it arrives. Give notes by scene and second ("scene 5, second 12: the zoom is too fast"), or by the time in the full video.</li>
-      <li>Every fix is rendered again and sent again. The scenes are joined into one video only once every one of them has been delivered.</li>
-    </ol>
-    <p data-l="he">התוצרים נשמרים בתיקייה אחת בריפו:</p>
-    <p data-l="en">Everything goes into one directory of the repository:</p>
-    <pre>video/&lt;name&gt;/
-  script/        script-original, script.md (proofread), spelling.md (questions)
-  scenes.md      the list of scenes, with timings
-  scenes/NN-slug/  description.md, subtitles.srt, scene.py, out/NN-slug.mp4
-  final/         &lt;name&gt;.mp4, &lt;name&gt;-subtitled.mp4, &lt;name&gt;.srt</pre>
-  </section>
+
 
   <!-- ===================== writing a script ===================== -->
   <section>
@@ -254,87 +185,57 @@ mkdir -p ~/.claude/skills &amp;&amp; unzip -o manim-video.zip -d ~/.claude/skill
       <tr><th>מה</th><th>איך כותבים</th><th>לאן זה הולך</th></tr>
       <tr><td><b>קריינות</b></td><td>טקסט רגיל, בדיוק כמו שהוא צריך להיקרא</td><td>לכתוביות, מילה במילה. רק שגיאות כתיב מתוקנות.</td></tr>
       <tr><td><b>הוראות לאנימציה</b></td><td>בתוך <b>סוגריים מרובעים</b>: <code>[המספר מופיע על ציר המספרים]</code></td><td>לתוכנית האנימציה, לעולם לא לכתוביות</td></tr>
-      <tr><td><b>נוסחאות</b></td><td>LaTeX בין סימני דולר: <code>$p_{1\%}(n)$</code></td><td>למסך. לכתוביות רק אם הקריינות אומרת אותן.</td></tr>
+      <tr><td><b>נוסחאות</b></td><td>LaTeX בין סימני דולר: <code>$p_{1\%}(n)$</code></td><td>למסך או לכתוביות, לפי אם הנוסחה נמצאת בין סוגריים מרובעים או לא</td></tr>
     </table></div>
     <div class="tbl"><table data-l="en">
       <tr><th>What</th><th>How to write it</th><th>Where it goes</th></tr>
       <tr><td><b>Narration</b></td><td>plain text, exactly as it should be read</td><td>the subtitles, word for word; only spelling is corrected</td></tr>
       <tr><td><b>Directions for the animation</b></td><td>in <b>square brackets</b>: <code>[the number appears on the number line]</code></td><td>the animation plan, never the subtitles</td></tr>
-      <tr><td><b>Formulas</b></td><td>LaTeX between dollar signs: <code>$p_{1\%}(n)$</code></td><td>the screen; the subtitles only when the narration says them</td></tr>
+      <tr><td><b>Formulas</b></td><td>LaTeX between dollar signs: <code>$p_{1\%}(n)$</code></td><td>the screen or the subtitles, depending on whether the formula stands inside square brackets or not</td></tr>
     </table></div>
 
-    <h3 data-l="he">כדאי לדעת</h3>
-    <h3 data-l="en">Good to know</h3>
-    <ul data-l="he">
-      <li><b>סוגריים עגולים הם חלק מהקריינות</b> ומופיעים בכתוביות. הוראות כותבים רק בסוגריים מרובעים.</li>
-      <li><b>סוגריים מרובעים בתוך נוסחה הם מתמטיקה</b>, למשל <code>$[0,1]$</code> או <code>$\left[\frac{n}{p}\right]$</code>, ולא הוראה. במקרה של ספק, Claude שואל.</li>
-      <li><b>ההוראות יכולות להיות קצרות וחלקיות</b>, למשל „[הגרף עובר לסקלה לוגריתמית]”. Claude משלים את הפרטים ומסמן בתוכנית כל החלטה שלו ב־<code>[fill]</code>, כדי שתראו מה הוא הוסיף.</li>
-      <li><b>הוראה עומדת ליד המשפט שהיא שייכת אליו.</b> האנימציה מתחילה עם המשפט שמדבר עליה, ולא אחריו.</li>
-      <li><b>תמונות</b> (דיוקנאות וכדומה) מבקשים בהוראה, למשל „[מופיעה תמונה של גאוס]”. Claude מוריד אותן ממקורות חופשיים.</li>
-      <li><b>קצב ההקראה</b> הוא 5.05 הברות לשנייה, ונוסחה נספרת לפי ההקראה שלה (<span class="tex">r<sub>1%</sub></span> נקראת „אר אחוז”). אפשר לבקש קצב אחר.</li>
-      <li>ההוראות הן משאלות, לא קוד. אפשר לכתוב „[הזום צריך להיות איטי]” או „[המספר הופך ל־10^6 תוך כדי תנועה]”.</li>
-    </ul>
-    <ul data-l="en">
-      <li><b>Parentheses belong to the narration</b> and appear in the subtitles. Directions go in square brackets only.</li>
-      <li><b>Square brackets inside a formula are mathematics</b> (<code>$[0,1]$</code>, <code>$\left[\frac{n}{p}\right]$</code>), not a direction. When it is unclear, Claude asks.</li>
-      <li><b>Directions can be short and incomplete</b>, e.g. "[the graph switches to a log scale]". Claude fills in the details, and marks each of its own decisions in the plan with <code>[fill]</code> so you can see what it added.</li>
-      <li><b>Put a direction next to the sentence it belongs to.</b> An animation starts with the sentence that speaks of it, not after it.</li>
-      <li><b>Images</b> (portraits and the like) are asked for in a direction, e.g. "[a portrait of Gauss appears]". Claude downloads them from free sources.</li>
-      <li><b>The reading rate</b> is 5.05 syllables per second, a formula counted as it is read aloud (<span class="tex">r<sub>1%</sub></span> is "r percent"). Ask for another rate if you like.</li>
-      <li>Directions are wishes, not code. You can write "[the zoom should be slow]" or "[the number turns into 10^6 while moving]".</li>
-    </ul>
 
     <h3 data-l="he">דוגמה</h3>
     <h3 data-l="en">Example</h3>
-    <pre class="rtl" data-l="he"><span class="say">קחו מספר גדול. לדוגמה עשרת אלפים</span> <span class="dir">[המספר מופיע על ציר המספרים]</span><span class="say">. מה הסיכוי שהוא יהיה ראשוני?</span>
+    <pre class="rtl" data-l="he">קחו מספר גדול. לדוגמה עשרת אלפים [המספר מופיע על ציר המספרים]. מה הסיכוי שהוא יהיה ראשוני?
 
-<span class="say">נגריל מספר שסוטה מעשרת אלפים בלא יותר מאחוז אחד (כלומר בלא יותר ממאה)</span> <span class="dir">[התחום מסומן על ציר המספרים]</span><span class="say">, ונשאל מה ההסתברות שהוא ראשוני.</span>
+נגריל מספר שסוטה מעשרת אלפים בלא יותר מאחוז אחד (כלומר בלא יותר ממאה) [התחום מסומן על ציר המספרים], ונשאל מה ההסתברות שהוא ראשוני.
 
-<span class="dir">[חלון בגודל 1% גולש לאורך הציר, ומעליו נבנה גרף ההסתברות]</span>
-<span class="say">נסמן את הפונקציה הזאת ב-</span><span class="tex">$p_{1\%}(n)$</span><span class="say">. היא מקבלת ערכים בקטע </span><span class="tex">$[0,1]$</span><span class="say">.</span></pre>
-    <pre class="rtl" data-l="en" style="direction:ltr;text-align:left"><span class="say">Take a large number, say ten thousand</span> <span class="dir">[the number appears on the number line]</span><span class="say">. What is the chance that it is prime?</span>
+[חלון בגודל 1% גולש לאורך הציר, ומעליו נבנה גרף ההסתברות]
+נסמן את הפונקציה הזאת ב-<span class="tex">$p_{1\%}(n)$</span>. היא מקבלת ערכים בקטע <span class="tex">$[0,1]$</span>.</pre>
+    <pre class="rtl" data-l="en" style="direction:ltr;text-align:left">Take a large number, say ten thousand [the number appears on the number line]. What is the chance that it is prime?
 
-<span class="say">Draw a number at most one percent away from ten thousand (that is, at most a hundred away)</span> <span class="dir">[the range is marked on the line]</span><span class="say">, and ask how likely it is to be prime.</span>
+Draw a number at most one percent away from ten thousand (that is, at most a hundred away) [the range is marked on the line], and ask how likely it is to be prime.
 
-<span class="dir">[a 1% window slides along the axis, and the graph of the probability is traced above it]</span>
-<span class="say">Call this function </span><span class="tex">$p_{1\%}(n)$</span><span class="say">. Its values lie in </span><span class="tex">$[0,1]$</span><span class="say">.</span></pre>
-    <p class="muted" data-l="he">בשחור: קריינות (כולל הסוגריים העגולים). באדום: הוראות. בכחול: נוסחאות, והסוגריים המרובעים שבתוכן הם מתמטיקה.</p>
-    <p class="muted" data-l="en">Black: narration (parentheses included). Red: directions. Blue: formulas, whose square brackets are mathematics.</p>
+[a 1% window slides along the axis, and the graph of the probability is traced above it]
+Call this function <span class="tex">$p_{1\%}(n)$</span>. Its values lie in <span class="tex">$[0,1]$</span>.</pre>
+    <p class="muted" data-l="he">מה שבסוגריים מרובעים הוא הוראות לאנימציה. כל השאר הוא קריינות, כולל הסוגריים העגולים. הנוסחאות כתובות בין סימני $, וסוגריים מרובעים בתוך נוסחה, כמו ב־<code>$[0,1]$</code>, הם מתמטיקה.</p>
+    <p class="muted" data-l="en">What is in square brackets is a direction for the animation. Everything else is narration, parentheses included. Formulas are written between $ signs, and square brackets inside a formula, as in <code>$[0,1]$</code>, are mathematics.</p>
   </section>
 
   <!-- ===================== the prompt ===================== -->
   <section id="prompt">
     <h2><span class="dot" style="background:var(--blue)"></span>
       <span data-l="he">פרומפט מוכן</span><span data-l="en">A ready prompt</span></h2>
-    <p data-l="he">מדביקים אותו ל־Claude Code, מחליפים את השם ואת התסריט, ושולחים. הוא עובד גם כשהסקיל עוד לא מותקן.</p>
-    <p data-l="en">Paste it into Claude Code, replace the name and the script, and send. It works when the skill is not installed yet.</p>
-    <div class="codebox rtl" data-l="he"><pre class="rtl" id="prompt-he">אני רוצה סרטון הסבר מונפש, בסגנון 3Blue1Brown, שנבנה עם Manim מהתסריט שבסוף ההודעה.
+    <p data-l="he">מדביקים אותו ל־Claude Code, מחליפים את התסריט ושולחים. הוא עובד גם כשהסקיל עוד לא מותקן.</p>
+    <p data-l="en">Paste it into Claude Code, replace the script, and send. It works when the skill is not installed yet.</p>
+    <div class="codebox rtl" data-l="he"><pre class="rtl" id="prompt-he">אני רוצה סרטון הסבר מונפש, שנבנה עם Manim מהתסריט שבסוף ההודעה.
 
-עבוד לפי הסקיל manim-video. אם הוא עוד לא מותקן אצלך:
-1. הורד אותו מכאן: https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
-   (או שבט את https://github.com/Rami5743/AI_MANIM — הסקיל נמצא בתיקייה skills/manim-video).
-2. פתח אותו לתיקייה <bdi dir="ltr">.claude/skills/</bdi> של הפרויקט, כך שייווצר <bdi dir="ltr">.claude/skills/manim-video/SKILL.md</bdi>.
-3. קרא את SKILL.md ואת קובצי ההפניה שהוא מפנה אליהם, ופעל לפיהם מההתחלה ועד הסוף.
-אם אינך יכול להוריד את הסקיל, אמור לי זאת ועצור.
-
-שמור את הפרויקט בתיקייה video/&lt;שם-קצר&gt;/ בריפו הזה, דחוף כל שלב, ושלח לי כל סצנה ברגע שהיא מוכנה.
-
-בתסריט: טקסט רגיל הוא הקריינות והכתוביות. מה שבסוגריים מרובעים [...] הוא הוראות לאנימציה. נוסחאות כתובות ב-LaTeX בין סימני $, וסוגריים מרובעים בתוך נוסחה הם מתמטיקה.
+עבוד לפי הסקיל manim-video. אם הוא עוד לא מותקן אצלך, הורד אותו מכאן:
+https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
+(או שבט את https://github.com/Rami5743/AI_MANIM — הסקיל נמצא בתיקייה skills/manim-video),
+קרא את SKILL.md שבו ופעל לפיו.
+אם אינך יכול להוריד ולהתקין את הסקיל, אמור לי זאת ועצור.
 
 התסריט:
 &lt;הדביקו כאן את התסריט&gt;</pre><button class="copy" type="button"></button></div>
-    <div class="codebox" data-l="en"><pre id="prompt-en" style="white-space:pre-wrap">I want an animated explainer video, in the style of 3Blue1Brown, built with Manim from the script at the end of this message.
+    <div class="codebox" data-l="en"><pre id="prompt-en" style="white-space:pre-wrap">I want an animated explainer video, built with Manim from the script at the end of this message.
 
-Work by the manim-video skill. If it is not installed yet:
-1. Download it from https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
-   (or clone https://github.com/Rami5743/AI_MANIM — the skill is in skills/manim-video).
-2. Unzip it into the project's .claude/skills/ folder, so that .claude/skills/manim-video/SKILL.md exists.
-3. Read SKILL.md and the reference files it points to, and follow them from start to finish.
-If you cannot download the skill, tell me so and stop.
-
-Keep the project in video/&lt;short-name&gt;/ in this repository, push every stage, and send me each scene as soon as it is ready.
-
-In the script, plain text is the narration and the subtitles; text in [square brackets] is a direction for the animation; formulas are LaTeX between $ signs, and square brackets inside a formula are mathematics.
+Work by the manim-video skill. If it is not installed yet, download it from
+https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
+(or clone https://github.com/Rami5743/AI_MANIM — the skill is in skills/manim-video),
+read its SKILL.md and follow it.
+If you cannot download and install the skill, tell me so and stop.
 
 The script:
 &lt;paste the script here&gt;</pre><button class="copy" type="button"></button></div>
