@@ -25,10 +25,14 @@ Rules:
   - an English word has one syllable per group of vowels (y counted as a
     vowel), less a silent final e, at least 1.
 """
-import json, math, re, sys
+import json, math, re, sys, unicodedata
 
 HEB = re.compile(r"[א-תװ-ײ]+")
-LAT = re.compile(r"[A-Za-z]{2,}")
+# an English word: two letters or more, or a contraction (let's, don't, I'm);
+# a single letter is a variable or "a"/"I", and needs a reading
+# (Latin letters with diacritics included: Vallée, Poussin, Gödel)
+L = "A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u024F"
+LAT = re.compile(rf"[{L}]+(?:['’][{L}]+)+|[{L}]{{2,}}")
 NEUTRAL = re.compile(r"[\s,.:;?!\"'״׳()\-–—⁦-⁩]+")
 
 
@@ -37,7 +41,8 @@ def hebrew_word(w):
 
 
 def english_word(w):
-    w = w.lower()
+    w = unicodedata.normalize("NFD", re.sub(r"['’]", "", w.lower()))
+    w = "".join(ch for ch in w if not unicodedata.combining(ch))
     n = len(re.findall(r"[aeiouy]+", w))
     if w.endswith("e") and not w.endswith(("le", "ee")) and n > 1:
         n -= 1
@@ -52,8 +57,10 @@ def spoken(text, readings):
     out, i = [], 0
     while i < len(text):
         m = pattern.match(text, i) if pattern else None
-        # a reading must not start inside a word: "ln" in "ln(n)" yes, "n" in "ברור" no
-        if m and (i == 0 or not text[i - 1].isalnum()):
+        # a reading must not start or end inside a word: "ln" in "ln(n)" yes,
+        # "n" in "ברור" no, "a" in "at" no
+        if m and (i == 0 or not text[i - 1].isalnum() or not m.group(0)[0].isalnum()) \
+                and (m.end() == len(text) or not text[m.end()].isalnum() or not m.group(0)[-1].isalnum()):
             out.append(" " + readings[m.group(0)] + " ")
             i = m.end()
             continue
