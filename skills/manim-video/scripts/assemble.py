@@ -9,7 +9,9 @@ With `--project`, the scene directories are `<project>/scenes/*/`, taken in
 lexical order — which is why they are numbered `01`, `02`, …. Each contributes
 the one `.mp4` under its `out/` and, if present, its `subtitles.srt`. The
 default output is `<project>/final/<project name>.mp4` with the merged track
-beside it. `--burn` also writes `<name>-subtitled.mp4`, the same video with
+beside it. Subtitles in other languages, `subtitles.<lang>.srt` in the scene
+directories (same times as the scene's cues), are merged the same way into
+`<project name>.<lang>.srt`; the burned-in copy carries the main track only. `--burn` also writes `<name>-subtitled.mp4`, the same video with
 the subtitles burned into the picture. With `--project`, when every scene has
 a subtitled preview (`preview/<name>-subtitled.mp4`) at least as new as its
 render and its subtitles, those are joined by stream copy: nothing is encoded
@@ -255,6 +257,23 @@ def main() -> None:
     os.makedirs(os.path.dirname(os.path.abspath(srt_out)) or ".", exist_ok=True)
     count = merge_subs(subs, offsets, srt_out)
     print(f"\nwrote {os.path.abspath(srt_out)}  ({count} cues)")
+    if args.project:
+        # subtitles in other languages: scenes/*/subtitles.<lang>.srt, merged
+        # with the same offsets into final/<name>.<lang>.srt
+        langs = sorted({f[len("subtitles."):-len(".srt")]
+                        for v in videos
+                        for f in os.listdir(os.path.dirname(os.path.dirname(v)))
+                        if f.startswith("subtitles.") and f.endswith(".srt") and f != "subtitles.srt"})
+        for lang in langs:
+            per_scene = []
+            for v in videos:
+                path = os.path.join(os.path.dirname(os.path.dirname(v)), f"subtitles.{lang}.srt")
+                per_scene.append(path if os.path.exists(path) else None)
+            lang_out = os.path.splitext(out)[0] + f".{lang}.srt"
+            n = merge_subs(per_scene, offsets, lang_out)
+            missing = sum(p is None for p in per_scene)
+            note = f", {missing} scene(s) without" if missing else ""
+            print(f"wrote {os.path.abspath(lang_out)}  ({n} cues{note})")
 
     concat(videos, out, None)
     if args.burn:
