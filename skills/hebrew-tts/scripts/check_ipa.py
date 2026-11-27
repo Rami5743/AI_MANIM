@@ -15,7 +15,9 @@ import json, re, sys
 
 ALLOWED = set("aeiouɡgʔfvszʃxhmnlrʁjʒpbtdk͡ˈˌ")
 STRESS_ME = {"kal", "tov", "kan", "rak", "ra", "ɡraf", "tur", "loɡ", "sxum", "klum",
-             "ʃuv", "kt͡sat", "po", "jeʃ", "ex", "kxu"}
+             "ʃuv", "kt͡sat", "po", "jeʃ", "ex", "kxu",
+             # letter names, also inside a formula's reading
+             "en", "ej", "i", "ar", "pi"}
 
 
 def problems(word):

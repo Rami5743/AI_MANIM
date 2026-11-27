@@ -49,7 +49,10 @@ complaint of a native speaker, and kept only when the speaker heard it fixed.
      זה, לא) stay unmarked;
    - a Latin letter is read by its name, and a name that begins with a vowel
      begins with a glottal stop: e `ˈʔi`, n `ˈʔen`, a `ˈʔej`, r `ʔar` — without
-     it "בסיס e" ran into "basisi". p is `ˈpi`;
+     it "בסיס e" ran into "basisi". p is `ˈpi`. **Every** letter name carries
+     its stress mark, also inside a longer formula reading ("pi axuz ʃel
+     ˈʔen"): an unstressed "en" at the end of a formula made the engine pause
+     0.6 s before it, twice, in different scenes;
    - a word that fuses with the one before gets a glottal stop at its start:
      "וכך הלאה" → `ʔˈhalʔa`;
    - a short unstressed prefix that disappears gets a secondary stress:
