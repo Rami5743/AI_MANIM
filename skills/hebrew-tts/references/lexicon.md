@@ -23,6 +23,9 @@ as right. Reuse these as they are.
 | הסכום | `hasˈxum` | k |
 | מלמעלה ומלמטה | `mileˈmala umileˈmata` | `milmala` |
 | מ-n | `meˈʔen` (one `<phoneme>`) | a pause at the hyphen |
+| מהפכנית, המהפכניים | `mahapxaˈnit`, `hamahapxaniˈjim` | `mahpexanit` (the grammar book's) |
+| רימן | `riˈman` | `ˈriman` (the German stress) |
+| הלוג הוא בערך | (a text fix: "הוא" was missing) | |
 
 ## Formulas (read aloud)
 
@@ -169,7 +172,7 @@ word is reused in another form.
 | הלוגים | `haloˈɡim` |
 | הלוגריתם | `haloɡaˈritm` |
 | הם | `hem` |
-| המהפכניים | `hamahpexaniˈjim` |
+| המהפכניים | `hamahapxaniˈjim` |
 | המוחלשת | `hamuxˈleʃet` |
 | המכפלה | `hamaxpeˈla` |
 | המלאה | `hameleˈʔa` |
@@ -336,7 +339,7 @@ word is reused in another form.
 | מהי | `ˈmahi` |
 | מהם | `meˈhem` |
 | מהמספרים | `mehamispaˈrim` |
-| מהפכנית | `mahpexaˈnit` |
+| מהפכנית | `mahapxaˈnit` |
 | מהשלמים | `mehaʃleˈmim` |
 | מוחלשת | `muxˈleʃet` |
 | מוכיח | `moˈxiax` |
@@ -453,7 +456,7 @@ word is reused in another form.
 | ראשוניים | `riʃoniˈjim` |
 | רואים | `roˈʔim` |
 | רוצים | `roˈt͡sim` |
-| רימן | `ˈriman` |
+| רימן | `riˈman` |
 | רע | `ˈra` |
 | רק | `ˈrak` |
 | שאומנם | `ʃeʔumˈnam` |

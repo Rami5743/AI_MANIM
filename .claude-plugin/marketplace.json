@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Marketplace exposing the manim-video skill as a Claude Code plugin.",
-    "version": "1.0.14"
+    "version": "1.0.15"
   },
   "plugins": [
     {

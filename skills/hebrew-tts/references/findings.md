@@ -93,6 +93,9 @@ The engine said what it was told; the transcription was wrong:
 - **סְכוּם** (a sum) `sxum`, with x; the verb לִסְכֹּם `lisˈkom`, with k.
 - **מלמעלה ומלמטה**: `mileˈmala umileˈmata` (spoken), not `milˈmala`.
 - **ויכולה**: `vixoˈla`, not `vijxoˈla`.
+- **מהפכנית**: spoken `mahapxaˈnit`, not the grammar book's `mahpexaˈnit`.
+- **Names**: in Hebrew mouths, not the original language's: רימן is
+  `riˈman` (final stress), not German `ˈriman`. Ask when unsure.
 - final ע is not a glottal stop: מידע `meˈda`.
 - **ונסה** in a text that means "we will try" is a typo for וננסה; fix the
   text, not the reading.
