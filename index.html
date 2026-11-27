@@ -59,7 +59,7 @@
     padding: 5px 12px 5px 8px; font: inherit; font-size: 0.9rem; cursor: pointer;
   }
   .langs button[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
-  .langs svg { width: 24px; height: 16px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
+  .langs svg { height: 16px; border-radius: 2px; display: block; box-shadow: 0 0 0 1px rgba(0,0,0,.12); }
 
   /* the two languages: only the chosen one is shown */
   html[data-lang="he"] [data-l="en"], html[data-lang="en"] [data-l="he"] { display: none !important; }
@@ -125,7 +125,6 @@
     background: var(--code-bg); border: 1px solid var(--line); font-size: .85rem; font-weight: 700;
   }
   .tex { direction: ltr; unicode-bidi: isolate; }
-  footer { margin-top: 2rem; color: var(--muted); font-size: .88rem; }
 </style>
 </head>
 <body>
@@ -133,11 +132,11 @@
 
   <nav class="langs" aria-label="Language / שפה">
     <button type="button" data-set="he" aria-pressed="true" title="עברית">
-      <svg viewBox="0 0 220 160" aria-hidden="true"><rect width="220" height="160" fill="#fff"/><rect y="15" width="220" height="25" fill="#0038b8"/><rect y="120" width="220" height="25" fill="#0038b8"/><g fill="none" stroke="#0038b8" stroke-width="5.5"><path d="M110 52 L136.5 98 L83.5 98 Z"/><path d="M110 108 L83.5 62 L136.5 62 Z"/></g></svg>
+      <svg viewBox="0 0 220 160" style="width:22px" aria-hidden="true"><rect width="220" height="160" fill="#fff"/><rect y="15" width="220" height="25" fill="#0038b8"/><rect y="120" width="220" height="25" fill="#0038b8"/><g fill="none" stroke="#0038b8" stroke-width="5.5"><path d="M110 52 L136.5 98 L83.5 98 Z"/><path d="M110 108 L83.5 62 L136.5 62 Z"/></g></svg>
       <span>עברית</span>
     </button>
     <button type="button" data-set="en" aria-pressed="false" title="English">
-      <svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="uk"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>
+      <svg viewBox="0 0 190 100" style="width:30px" aria-hidden="true"><rect width="190" height="100" fill="#fff"/><rect y="0.000" width="190" height="7.692" fill="#B22234"/><rect y="15.385" width="190" height="7.692" fill="#B22234"/><rect y="30.769" width="190" height="7.692" fill="#B22234"/><rect y="46.154" width="190" height="7.692" fill="#B22234"/><rect y="61.538" width="190" height="7.692" fill="#B22234"/><rect y="76.923" width="190" height="7.692" fill="#B22234"/><rect y="92.308" width="190" height="7.692" fill="#B22234"/><rect width="76" height="53.846" fill="#3C3B6E"/><g fill="#fff"><circle cx="6.33" cy="5.38" r="2.2"/><circle cx="19.00" cy="5.38" r="2.2"/><circle cx="31.67" cy="5.38" r="2.2"/><circle cx="44.33" cy="5.38" r="2.2"/><circle cx="57.00" cy="5.38" r="2.2"/><circle cx="69.67" cy="5.38" r="2.2"/><circle cx="12.67" cy="10.77" r="2.2"/><circle cx="25.33" cy="10.77" r="2.2"/><circle cx="38.00" cy="10.77" r="2.2"/><circle cx="50.67" cy="10.77" r="2.2"/><circle cx="63.33" cy="10.77" r="2.2"/><circle cx="6.33" cy="16.15" r="2.2"/><circle cx="19.00" cy="16.15" r="2.2"/><circle cx="31.67" cy="16.15" r="2.2"/><circle cx="44.33" cy="16.15" r="2.2"/><circle cx="57.00" cy="16.15" r="2.2"/><circle cx="69.67" cy="16.15" r="2.2"/><circle cx="12.67" cy="21.54" r="2.2"/><circle cx="25.33" cy="21.54" r="2.2"/><circle cx="38.00" cy="21.54" r="2.2"/><circle cx="50.67" cy="21.54" r="2.2"/><circle cx="63.33" cy="21.54" r="2.2"/><circle cx="6.33" cy="26.92" r="2.2"/><circle cx="19.00" cy="26.92" r="2.2"/><circle cx="31.67" cy="26.92" r="2.2"/><circle cx="44.33" cy="26.92" r="2.2"/><circle cx="57.00" cy="26.92" r="2.2"/><circle cx="69.67" cy="26.92" r="2.2"/><circle cx="12.67" cy="32.31" r="2.2"/><circle cx="25.33" cy="32.31" r="2.2"/><circle cx="38.00" cy="32.31" r="2.2"/><circle cx="50.67" cy="32.31" r="2.2"/><circle cx="63.33" cy="32.31" r="2.2"/><circle cx="6.33" cy="37.69" r="2.2"/><circle cx="19.00" cy="37.69" r="2.2"/><circle cx="31.67" cy="37.69" r="2.2"/><circle cx="44.33" cy="37.69" r="2.2"/><circle cx="57.00" cy="37.69" r="2.2"/><circle cx="69.67" cy="37.69" r="2.2"/><circle cx="12.67" cy="43.08" r="2.2"/><circle cx="25.33" cy="43.08" r="2.2"/><circle cx="38.00" cy="43.08" r="2.2"/><circle cx="50.67" cy="43.08" r="2.2"/><circle cx="63.33" cy="43.08" r="2.2"/><circle cx="6.33" cy="48.46" r="2.2"/><circle cx="19.00" cy="48.46" r="2.2"/><circle cx="31.67" cy="48.46" r="2.2"/><circle cx="44.33" cy="48.46" r="2.2"/><circle cx="57.00" cy="48.46" r="2.2"/><circle cx="69.67" cy="48.46" r="2.2"/></g></svg>
       <span>English</span>
     </button>
   </nav>
@@ -172,7 +171,7 @@
     <p data-l="he">הסקיל צריך סביבה שבה Claude מריץ פקודות ומתקין חבילות: <b>Claude Code</b>, במחשב שלכם (טרמינל או אפליקציה) או בענן (<a href="https://claude.ai/code">claude.ai/code</a>). את כל הכלים הוא מתקין בעצמו.</p>
     <p data-l="en">The skill needs an environment where Claude runs commands and installs packages: <b>Claude Code</b>, on your computer (terminal or app) or in the cloud (<a href="https://claude.ai/code">claude.ai/code</a>). It installs all the tools itself.</p>
     <p data-l="he">אפשר לתת ל־Claude הערות, תוך כדי עבודה על הסרטון, בהתאם לתוצרים שהוא נתן לכם.</p>
-    <p data-l="en">You can give Claude notes while it works on the video, on whatever it has delivered so far.</p>
+    <p data-l="en">You can give Claude feedback as it works on the video, based on what it has delivered so far.</p>
   </section>
 
 
@@ -231,7 +230,7 @@ https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
 &lt;הדביקו כאן את התסריט&gt;</pre><button class="copy" type="button"></button></div>
     <div class="codebox" data-l="en"><pre id="prompt-en" style="white-space:pre-wrap">I want an animated explainer video, built with Manim from the script at the end of this message.
 
-Work by the manim-video skill. If it is not installed yet, download it from
+Use the manim-video skill. If it is not installed yet, download it from
 https://github.com/Rami5743/AI_MANIM/releases/latest/download/manim-video.zip
 (or clone https://github.com/Rami5743/AI_MANIM — the skill is in skills/manim-video),
 read its SKILL.md and follow it.
@@ -241,10 +240,6 @@ The script:
 &lt;paste the script here&gt;</pre><button class="copy" type="button"></button></div>
   </section>
 
-  <footer>
-    <p data-l="he">הסקיל נשמר זהה בשני ריפואים: <a href="https://github.com/Rami5743/AI_MANIM">AI_MANIM</a> (התוסף הזה) ו־AI_TOOLS. האיקון מבוסס על הלוגו של <a href="https://www.manim.community/">Manim Community</a> (רישיון MIT), והמשולש שבו הפך לכפתור הפעלה.</p>
-    <p data-l="en">The skill is kept identical in two repositories: <a href="https://github.com/Rami5743/AI_MANIM">AI_MANIM</a> (this plugin) and AI_TOOLS. The icon is based on the logo of <a href="https://www.manim.community/">Manim Community</a> (MIT licence), its triangle turned into a play button.</p>
-  </footer>
 </div>
 
 <script>
