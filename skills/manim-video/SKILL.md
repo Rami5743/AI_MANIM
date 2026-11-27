@@ -63,14 +63,27 @@ incomplete: filling them in is stage 3's job.
 
 ## The stages
 
-| # | Stage | Output | Pushed |
+| # | Stage | Output | Saved |
 |---|---|---|---|
 | 1 | The script arrives | `script/script-original.<ext>`, byte for byte as given | yes |
 | 2 | Proofreading | `script/script.md` | yes |
-| 3 | The plan | `scenes.md` and one directory per scene | one commit per scene |
-| 4 | The toolchain | nothing in the repo | — |
-| 5 | Implementation | `scene.py` and `out/NN-slug.mp4` per scene | one commit per scene |
+| 3 | The plan | `scenes.md` and one directory per scene | once per scene |
+| 4 | The toolchain | nothing in the project | — |
+| 5 | Implementation | `scene.py` and `out/NN-slug.mp4` per scene | once per scene |
 | 6 | Integration | `final/<project>.mp4` and `final/<project>.srt` | yes |
+
+**Saving a step** means what the place allows, decided once at the start:
+
+- in a git repository you can push from: commit, and push;
+- in a git repository you cannot push from (a sandbox that blocks pushes, as
+  Cowork does): commit, and tell the user once that the pushes are theirs to
+  make;
+- with no repository at all — a working folder, a container of your own:
+  nothing more than the files in the project directory.
+
+Wherever the skill says *commit* or *push* below, read *save*. In every case
+the files are handed to the user in chat as they are finished: that is the
+delivery, and it never depends on a repository.
 
 Stages run in order and do not interleave, with one exception: stage 4 is pure
 setup and is started in the background at the very beginning, so that the
@@ -78,8 +91,10 @@ toolchain is ready by the time stage 5 needs it.
 
 ## Layout
 
-The project lives in a directory of its own in the repository the user names,
-`video/<project-slug>/` unless they say otherwise.
+The project lives in a directory of its own — in the repository the user
+names, or, with no repository, in the working folder (a folder the user
+connected, or your own container) — `video/<project-slug>/` unless they say
+otherwise.
 
 ```
 video/<project-slug>/
@@ -308,7 +323,7 @@ the code that already exists.
 
 Scene by scene, not all at the end. For each one, in this order:
 
-1. commit the scene directory on its own and push;
+1. save the scene directory on its own (commit and push where possible);
 2. zip the directory to the scratchpad and hand the user the zip;
 3. paste `description.md` and `subtitles.srt` into the chat reply.
 
@@ -327,7 +342,12 @@ read first when picking the project up again.
 
 ## Stage 4 — the toolchain
 
-Python, Manim Community, a LaTeX distribution, FFmpeg. Install as in
+Python, Manim Community, a LaTeX distribution, FFmpeg. With root (a container
+of your own, a cloud session), the system packages; without it (a sandbox
+such as Cowork's), the user-space route of `references/environment.md`. Some
+sandboxes limit how long one command may run (a few minutes): render a long
+scene in pieces, as that file describes — Manim keeps every finished
+animation and an interrupted render picks up where it stopped. Install as in
 `references/environment.md`, started in the background at the beginning of the
 session. Verify with the smoke test in that file before stage 5 begins — a
 missing LaTeX package shows up as a failed render twenty minutes later and is
@@ -358,9 +378,9 @@ Leave the loop only when the render matches `description.md` — every element
 present, in the described place, at the described time, and the last animation
 finishing with the last subtitle. Then render at final quality, and:
 
-1. commit `scene.py`, `out/NN-slug.mp4` and a preview with the subtitles
-   burned in (`references/review-loop.md`), update `scenes.md` to `approved`,
-   push;
+1. save `scene.py`, `out/NN-slug.mp4` and a preview with the subtitles
+   burned in (`references/review-loop.md`), and update `scenes.md` to
+   `approved` (commit and push where possible);
 2. give the user both videos in chat, named, with the scene number and the
    duration.
 
@@ -368,7 +388,7 @@ Then the next scene. A scene is never left half-implemented to start another.
 
 **Every approved render is delivered, and delivery is logged.** Handing the
 user the files is part of approving a scene, not an optional extra: right
-after the push, send both videos, then record the delivery with
+after saving, send both videos, then record the delivery with
 `scripts/deliveries.py record <project> <scene>`. The log keeps the hash of the
 render that was sent, so a scene that is re-rendered after a correction counts
 as undelivered until it is sent again. Re-rendering several scenes is no
@@ -397,8 +417,8 @@ is newer than its render and its subtitles. So a tool that regenerates
 subtitles or timings must leave a file untouched when its content is the same,
 or every preview looks stale and the whole video is burned again.
 
-Commit the final video and its subtitle track, push, and hand the user the file
-in chat.
+Save the final video and its subtitle track (commit and push where possible),
+and hand the user the file in chat.
 
 ### Another language
 
@@ -428,10 +448,11 @@ other scene is shared. `scripts/assemble.py --project <p> --lang <lang>
 - **The stages run one after another without stopping for approval.** The user
   asked for the whole pipeline, and every question that comes up is recorded in
   `spelling.md` or marked `[fill]` in a plan rather than asked mid-run.
-- **Every step is pushed and every step is shown.** Nothing finished waits in
-  the working tree, and nothing finished is described in chat without the file
-  itself being handed over. The repository is the record, the chat is the
-  review channel, and both get the same thing.
+- **Every step is saved and every step is shown.** Nothing finished waits
+  unsaved, and nothing finished is described in chat without the file itself
+  being handed over. The project directory (and its repository, where there is
+  one) is the record, the chat is the review channel, and both get the same
+  thing.
 - **At every natural pause — the end of a scene in stage 3, the end of a scene
   in stage 5 — check for new instructions from the user and adopt them before
   starting the next scene.** A correction to a scene already approved is applied
@@ -439,8 +460,8 @@ other scene is shared. `scripts/assemble.py --project <p> --lang <lang>
   correction that changes the plan — a different range, a dropped curve — goes
   into the affected `description.md` files first, back to `planned`, and the
   scenes are rebuilt from the edited plans; the scene the run was on waits.
-- Work on the branch the session is on, and do not open a pull request unless
-  asked.
+- In a repository, work on the branch the session is on, and do not open a
+  pull request unless asked.
 
 ## The boundary
 
