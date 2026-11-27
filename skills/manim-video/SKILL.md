@@ -33,7 +33,7 @@ and LaTeX formulas inside it. The two parts have completely different fates:
 |---|---|---|
 | The running text | the narration — what the viewer hears, or reads as subtitles | the subtitle track, word for word |
 | Text in `[square brackets]` | the user's instruction to you about the picture | the animation plan, never the subtitles |
-| LaTeX formulas | mathematics to be shown | `MathTex` on screen, and in the subtitle only when the narration says it aloud |
+| LaTeX formulas | mathematics | **by where it stands** (the user's rule): inside a `[direction]`, on screen (`MathTex`); in the narration, in the subtitles, as part of what is said |
 
 **Square brackets, not parentheses** (the user's convention). Parentheses are
 free for the narration itself: "(כמעט תמיד)" is something the narrator says,
