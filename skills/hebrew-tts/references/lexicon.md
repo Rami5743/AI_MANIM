@@ -24,7 +24,7 @@ as right. Reuse these as they are.
 | מלמעלה ומלמטה | `mileˈmala umileˈmata` | `milmala` |
 | מ-n | `meˈʔen` (one `<phoneme>`) | a pause at the hyphen |
 | מהפכנית, המהפכניים | `mahapxaˈnit`, `hamahapxaniˈjim` | `mahpexanit` (the grammar book's) |
-| רימן | `riˈman` | `ˈriman` (the German stress) |
+| רימן | `ˈri` + `man`, two adjacent `<phoneme>`s | every single-phoneme spelling came out "riMAN" |
 | הלוג הוא בערך | (a text fix: "הוא" was missing) | |
 
 ## Formulas (read aloud)
@@ -456,7 +456,7 @@ word is reused in another form.
 | ראשוניים | `riʃoniˈjim` |
 | רואים | `roˈʔim` |
 | רוצים | `roˈt͡sim` |
-| רימן | `riˈman` |
+| רימן | `ˈri` + `man` (split) |
 | רע | `ˈra` |
 | רק | `ˈrak` |
 | שאומנם | `ʃeʔumˈnam` |

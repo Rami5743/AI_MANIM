@@ -76,6 +76,12 @@ the same way (the voice knows no `ˌ`).
 | "מ-n" with a pause, like a comma | the hyphen; a space was no better | prefix + formula as one `<phoneme>`: `meˈʔen` |
 | a pause before "e" like a comma | a `<break>` inserted to separate it | no break; glottal stop instead |
 
+| רימן always "riMAN", whatever the stress mark | the engine's own reading of the name wins: the variant with the mark on "ri" was the same audio as plain text | two adjacent `<phoneme>`s, no space: `riˈ` + `man` |
+
+Before playing variants, check they differ from each other and from plain
+text (decode both, compare samples): five of nine "different" spellings of
+רימן came out the same audio.
+
 Variants that were judged worse: a short `<break>` between words (heard as a
 comma); spelling the letter as Hebrew text (`<sub alias="אִי">`); a glottal
 stop after the word instead of before the next.
@@ -94,8 +100,9 @@ The engine said what it was told; the transcription was wrong:
 - **מלמעלה ומלמטה**: `mileˈmala umileˈmata` (spoken), not `milˈmala`.
 - **ויכולה**: `vixoˈla`, not `vijxoˈla`.
 - **מהפכנית**: spoken `mahapxaˈnit`, not the grammar book's `mahpexaˈnit`.
-- **Names**: in Hebrew mouths, not the original language's: רימן is
-  `riˈman` (final stress), not German `ˈriman`. Ask when unsure.
+- **Names**: ask how a name is said; do not assume the original language's
+  stress, nor the Hebrew default. רימן is RI-man, and the engine needed the
+  split of §4 to say it.
 - final ע is not a glottal stop: מידע `meˈda`.
 - **ונסה** in a text that means "we will try" is a typo for וננסה; fix the
   text, not the reading.

@@ -54,6 +54,10 @@ complaint of a native speaker, and kept only when the speaker heard it fixed.
      "וכך הלאה" → `ʔˈhalʔa`;
    - a short unstressed prefix that disappears gets a secondary stress:
      כפונקציה `ˌkeˈfunktsja`;
+   - a word whose stress the engine keeps wrong whatever the IPA says
+     (רימן: every mark came out "riMAN"; check that a variant differs from
+     plain text before playing it) is said as two adjacent `<phoneme>`s with
+     no space: `<phoneme ph="riˈ">רי</phoneme><phoneme ph="man">מן</phoneme>`;
    - a Hebrew prefix joined to a formula by a hyphen ("מ-n", "ב-p₁%(n)") makes
      one `<phoneme>` with it, stress on the formula, a glottal stop between two
      vowels: `meˈʔen`. The hyphen made the engine pause; so did a space.
