@@ -58,6 +58,12 @@ the PNT video, "נרוץ על כל המספרים בטווח זה…" during the
 the animation is re-anchored to start with that sentence (1.1), and the
 silent stretch that held it becomes a wait for what is left of it (1.2).
 
+**1.8 Punctuation is time, and cues end at it.** (user) A narrator stops at
+the end of a sentence and breathes at a comma, so the timing gives those stops
+their time, between cues and inside them. A cue ends at a sentence or a comma,
+never inside a phrase; an animation that belongs to the second half of a long
+cue starts at its words (1.1), not at the cue.
+
 ## 2. Change moves, coming and going fades
 
 **2.1 When something changes, it moves; when it appears or goes away, it

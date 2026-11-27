@@ -130,7 +130,8 @@ animation outlasts its cue, and the first cue of a scene is held longer — a
 **One source for the plan's times and the code's.** Give every scene a
 `timeline.py` beside `description.md`: a list of rows
 `(key, anchor, offset, run_time, what)`, where the anchor is a cue number, a
-substring of a pause label, an absolute time or `("after", key)`.
+substring of a pause label, an absolute time, `("after", key)`, or
+`("words", n, "phrase")` — when the narration of cue n reaches those words.
 `scripts/timeline_md.py`, run from the project directory, writes the Timeline
 table of `description.md` from it, and the scene code takes every time from
 it — `T.play(self, anim, **T.row("key"))` (`scripts/timing.py`). A plan

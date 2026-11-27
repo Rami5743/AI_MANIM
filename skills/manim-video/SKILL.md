@@ -283,10 +283,12 @@ of the cue times rather than beside them.
 | Reading rate | 5.05 **syllables** per second, every formula and number counted as it is read aloud |
 | Cue duration | `max(1.8 s, syllables / 5.05)`, rounded up to 0.1 s |
 | Longest cue | 7.1 s — split it instead |
-| Gap between cues | 0.15 s |
+| Gap between cues | 0.45 s after a sentence, 0.25 s after a comma, 0.15 s otherwise |
+| Stops inside a cue | 0.35 s at a full stop, question mark or colon; 0.2 s at a comma — added to the cue's length |
 | Lines per cue | at most 2 |
 | Characters per line | at most 42 |
-| Where to break | at a clause boundary, never inside a formula and never between a number and its unit |
+| Where a cue ends | **at the end of a sentence, or else at a comma** (the user's rule); never inside a phrase, a formula, or between a number and its unit |
+| Where a cue's two lines break | after a sentence or a comma when both lines fit, else where they come out even |
 
 **Measure the rate in syllables, never in characters** (the user's rule). A
 formula is short on the page and long in the mouth: imagine it read aloud and
@@ -312,6 +314,17 @@ with the Unicode subscript digits, and the % is shown as an index too by the
 subtitle font that `scripts/subfont.py` builds (Unicode has no subscript %).
 Burn previews and the final video with that font, and use it for the subtitles
 of any web page that plays the videos.
+
+**Cutting the narration into cues.** A cue is a sentence, or a part of one
+that ends at a comma. Where the user's text ends a sentence or a clause
+without punctuation, supply the full stop or the comma in stage 2 (a missing
+stop at the end of a sentence is a certain correction) — it is also what tells
+the timing, and a speech engine, that the narrator stops there. Only a sentence
+too long for one cue and with no comma may be cut elsewhere: at a conjunction,
+where the narration would breathe anyway; list each such cut in
+`spelling.md`. An animation that starts in the middle of a cue is anchored to
+its words, `("words", n, "phrase")` in `timeline.py`: the cue's `timing.json`
+carries the time of every word.
 
 Add nothing to the narration and drop nothing from it. A stage direction
 never becomes a subtitle; a parenthesis in the narration always does.

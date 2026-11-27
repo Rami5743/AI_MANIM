@@ -21,11 +21,25 @@ class Timing:
             data = json.load(f)
         self.duration = data["duration"]
         self.cues = {c["n"]: _Span(c["start"], c["end"]) for c in data["cues"]}
+        self.cue_data = {c["n"]: c for c in data["cues"]}
         self.pauses = [(e["label"], _Span(e["start"], e["end"])) for e in data["events"] if e["kind"] == "pause"]
         self.clock = 0.0
 
     def cue(self, n):
         return self.cues[n]
+
+    def words(self, n, phrase):
+        """When the narration of cue n reaches the given words: the cue's start
+        plus the time of the word the phrase begins in (timing.json carries
+        "words": [character index, seconds] for every word of a cue)."""
+        c = self.cue_data[n]
+        i = c["text"].find(phrase)
+        if i < 0 or c["text"].find(phrase, i + 1) >= 0:
+            raise KeyError(f"cue {n} has {'no' if i < 0 else 'more than one'} {phrase!r}: {c['text']}")
+        if "words" not in c:
+            raise KeyError("timing.json has no word times; regenerate it")
+        t = max((sec for idx, sec in c["words"] if idx <= i), default=0.0)
+        return c["start"] + t
 
     def pause(self, key):
         """A pause by its index or by a substring of its label."""
@@ -79,11 +93,14 @@ class Timing:
 
 def resolve(rows, T):
     """rows: (key, anchor, offset, run_time, text). anchor: a cue number, a
-    substring of a pause label, an absolute time (float), or ("after", key)."""
+    substring of a pause label, an absolute time (float), ("after", key), or
+    ("words", n, "phrase") — when the narration of cue n reaches those words."""
     out = {}
     for key, anchor, offset, rt, text in rows:
         if isinstance(anchor, tuple) and anchor[0] == "after":
             base = out[anchor[1]][0] + out[anchor[1]][1]
+        elif isinstance(anchor, tuple) and anchor[0] == "words":
+            base = T.words(anchor[1], anchor[2])
         elif isinstance(anchor, int):
             base = T.cue(anchor).start
         elif isinstance(anchor, str):
