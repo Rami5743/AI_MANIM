@@ -428,6 +428,18 @@ subtitle files with the cumulative offsets, into `final/`. Use
 `scripts/assemble.py`. Check the join: play the seams, confirm no scene was
 dropped and no subtitle drifted, and confirm the total matches `scenes.md`.
 
+**No dead air longer than 1.5 s** (the user's rule). Once the narration is
+under the video (the hebrew-tts skill, or any recording), run
+`scripts/trim.py --project <p> --langs he,en`: every stretch in which the
+picture is frozen and no narration — in any language — says anything for
+more than 1.5 s is cut to 1.5 s, inside scenes and across seams (the silent
+tail of one scene and head of the next are one stretch). Nothing else
+changes; the subtitles move with the cuts. It leaves the renders alone and
+writes the trimmed scenes and the trimmed whole video beside them, so
+publish those. A speech engine reads faster than subtitles are timed (Hebrew
+at 85% of the subtitle time, English at 71%), so without this the video is
+full of pauses, most of them at the seams.
+
 **Redo only what changed.** A fix to one scene re-renders that scene, and a
 neighbour only if it inherits the changed picture (the next scene opens on the
 last frame of this one). Everything is re-rendered only when every scene's
@@ -506,6 +518,7 @@ other scene is shared. `scripts/assemble.py --project <p> --lang <lang>
 | `references/environment.md` | installing the toolchain, and the smoke test |
 | `scripts/frames.py` | contact sheets and single frames out of a rendered video |
 | `scripts/assemble.py` | joining the scene videos and merging the subtitle files |
+| `scripts/trim.py` | cutting every frozen, silent stretch of the narrated video to 1.5 s |
 | `scripts/timing.py` | the clock a scene plays against: animations at the absolute times of `timing.json`, or at the rows of the scene's `timeline.py` (`T.row`) |
 | `scripts/timeline_md.py` | writes a scene's Timeline table in `description.md` from its `timeline.py` |
 | `scripts/zoomline.py` | a number line that really zooms — the axis stretches and ticks travel with their values |
