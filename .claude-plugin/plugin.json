@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ai-manim",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Builds an animated explainer video, in the style of 3Blue1Brown, from a narration script with Manim: proofreading, scene plans with timed subtitles, implementation, render-and-review loops, and the final assembly.",
   "author": {
     "name": "Avraham Aizenbud"

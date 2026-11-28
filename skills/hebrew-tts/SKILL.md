@@ -101,7 +101,7 @@ The user's rule for choosing, settled after many rounds:
   to the standard voice at once, and send the user just that sentence;
 - a sentence already moved stays moved.
 
-In the PNT video 11 of about 90 sentences ended on the standard voice:
+In the PNT video 10 of 107 sentences ended on the standard voice:
 an accent drift, a dropped e, ולז'נדר, במקום (its i dropped), ההרמוני
 (stress), לסכום, "גם כך אנחנו עובדים בערך", and "מה שאומר" (מה misread).
 
