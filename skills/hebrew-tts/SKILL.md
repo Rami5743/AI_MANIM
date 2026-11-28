@@ -91,9 +91,51 @@ user preferred its tone — but it fails more: once it slid into an American
 accent for a whole sentence, and it reads some words differently from the
 standard voice from the same IPA (עכשיו as `ˈaxʃav` came out wrong; `axˈʃav`
 right). So: HD by default, with a **per-sentence fallback** to
-`he-IL-HilaNeural` (a list of sentences, keyed by their first cue) for the
-sentences where HD misbehaves and no IPA change fixes it. Switching voices
-re-opens words that were settled with the other voice: replay them.
+`he-IL-HilaNeural` (a list of sentences, keyed by their first cue).
+
+The user's rule for choosing, settled after many rounds:
+- when a sentence is wrong and the transcription shows **a clear cause**
+  (a wrong vowel, a missing syllable, a stress mark in the wrong place),
+  fix the IPA and keep HD;
+- when there is **no clear cause**, do not offer variants: move the sentence
+  to the standard voice at once, and send the user just that sentence;
+- a sentence already moved stays moved.
+
+In the PNT video 11 of about 90 sentences ended on the standard voice:
+an accent drift, a dropped e, ולז'נדר, במקום (its i dropped), ההרמוני
+(stress), לסכום, "גם כך אנחנו עובדים בערך", and "מה שאומר" (מה misread).
+
+**Switching voices re-opens everything settled with the other one.** After
+the switch to HD, words the user had approved (e, עכשיו) came out wrong
+again, and the user had to find them. Before reporting a switch done, list
+every sentence whose reading was settled by ear (the lexicon), render them
+in the new voice, and send them in one file (below) for one listening.
+
+## English
+
+`en-US-Andrew:DragonHDLatestNeural` (Andrew, HD) — the user's choice among
+seven (Andrew, Ava, Emma, Brian; HD, HD Omni, HD V3, standard). English needs
+none of the Hebrew machinery: plain text, formulas as `<sub alias>`, the HD
+voice without fallbacks. Two things carry over: one request per sentence at
+its cue, and the dead-air trim — English is read at 71% of the subtitle time,
+so it leaves long pauses (up to 5 s) unless trimmed (manim-video,
+`scripts/trim.py`). (The HD Omni voice of Brian ran sentences into the next
+cue; check the overlap report of `scripts/synth.py`.)
+
+## Working with the user
+
+- **Check yourself before asking.** The user will not listen to the whole
+  video again and again. After any change, find the places that could have
+  broken (the lexicon, the fallback list, sentences that changed) and give
+  the user **one file**: each sentence after a short beep, with a numbered
+  table of start times and what to listen for. Ask only about what you
+  cannot check.
+- **Variants: few, whole sentences, verified distinct** (decode and compare;
+  several "different" spellings come out as the same audio), labelled A, B,
+  C, in one file with times. Not variants for what the rules above decide.
+- **Never leave a request unanswered**, even one asked mid-task or one the
+  user did not follow up: a link asked for, a question left open (an answer
+  given inside a long message is easily missed: repeat it short).
 
 ## Measuring without ears
 
